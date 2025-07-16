@@ -1,6 +1,7 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { useState } from "react";
+import { motion } from "framer-motion";
 
 const contacts = [
   {
@@ -35,48 +36,230 @@ const contacts = [
     ),
     bg: "hover:shadow-red-500/40",
   },
-]
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/pixelsolve.co/",
+    svg: (
+      <svg viewBox="0 0 24 24" className="w-12 h-12" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="ig-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#f58529" />
+            <stop offset="50%" stopColor="#dd2a7b" />
+            <stop offset="100%" stopColor="#515bd4" />
+          </linearGradient>
+        </defs>
+        <rect x="2" y="2" width="20" height="20" rx="5" fill="url(#ig-gradient)" />
+        <circle cx="12" cy="12" r="5" stroke="#fff" strokeWidth="2" fill="none" />
+        <circle cx="17" cy="7" r="1.2" fill="#fff" />
+      </svg>
+    ),
+    bg: "hover:shadow-pink-500/40",
+  },
+];
 
 export default function Contact() {
+  const [modal, setModal] = useState<null | { name: string; href: string }>(null);
+
+  const handleContactClick = (contact: { name: string; href: string }) => {
+    setModal(contact);
+  };
+
+  const handleContinue = () => {
+    if (modal) {
+      window.open(modal.href, "_blank", "noopener,noreferrer");
+      setModal(null);
+    }
+  };
+
+  const handleCancel = () => setModal(null);
+
   return (
-    <section id="contact" className="py-20 bg-[#0b0f19] text-white">
+    <section id="contact" className="py-20 bg-[#0b0f19] text-white relative overflow-hidden">
+      {/* Background Animation for Contact Section */}
       <motion.div
-        initial={{ opacity: 0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
         viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 0.8 }}
-        className="text-center mb-12"
+        transition={{ duration: 1.5 }}
+        className="absolute inset-0"
       >
-        <h2 className="text-4xl md:text-5xl font-bold mb-4">Get in Touch</h2>
-        <p className="text-lg text-gray-300 max-w-xl mx-auto">Let’s connect on the platforms we actually use.</p>
+        <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-green-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-16 h-16 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
       </motion.div>
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.2 }}
-        variants={{
-          hidden: {},
-          visible: { transition: { staggerChildren: 0.15 } },
-        }}
-        className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 gap-8 justify-center items-center max-w-2xl mx-auto"
-      >
-        {contacts.map((contact) => (
-          <motion.a
-            key={contact.name}
-            href={contact.href}
-            target="_blank"
-            rel="noopener noreferrer"
-            variants={{ hidden: { opacity: 0, y: 30 }, visible: { opacity: 1, y: 0 } }}
-            whileHover={{ scale: 1.1, boxShadow: "0 0 24px 0 rgba(59,130,246,0.15)" }}
-            transition={{ type: "spring", stiffness: 300, damping: 18 }}
-            className={`flex flex-col items-center justify-center bg-white/10 rounded-xl p-6 transition-all duration-300 cursor-pointer shadow-lg ${contact.bg}`}
-            aria-label={contact.name}
+
+      {/* Modal Popup */}
+      {modal && (
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/40 backdrop-blur-sm">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.9 }}
+            transition={{ duration: 0.22, ease: "easeOut" }}
+            className="bg-white/10 border border-blue-500/30 rounded-2xl shadow-2xl p-8 max-w-xs w-full flex flex-col items-center glass-card"
+            style={{ boxShadow: "0 8px 32px 0 rgba(59,130,246,0.18)" }}
           >
-            {contact.svg}
-            <span className="mt-3 text-base font-medium text-white opacity-90 select-none">{contact.name}</span>
-          </motion.a>
-        ))}
-      </motion.div>
+            <div className="mb-4 text-lg font-semibold text-white text-center">
+              You're about to visit <span className="text-blue-400">{modal.name}</span>.<br />Continue?
+            </div>
+            <div className="flex gap-4 mt-2">
+              <button
+                onClick={handleContinue}
+                className="px-4 py-2 rounded-lg bg-gradient-to-r from-cool-blue to-accent-blue text-white font-semibold shadow hover:scale-105 transition"
+                autoFocus
+              >
+                Continue
+              </button>
+              <button
+                onClick={handleCancel}
+                className="px-4 py-2 rounded-lg bg-[#22273a]/80 text-gray-200 font-medium border border-blue-500/20 hover:bg-[#22273a] transition"
+              >
+                Cancel
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      )}
+
+      <div className="relative z-10">
+        {/* Enhanced Title Section with Staggered Animations */}
+        <motion.div
+          initial={{ opacity: 0, y: 80 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="text-center mb-12"
+        >
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="mb-4"
+          >
+            <motion.h2
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+              className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+            >
+              Get in Touch
+            </motion.h2>
+          </motion.div>
+          
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+            className="text-lg text-gray-300 max-w-xl mx-auto mb-2"
+          >
+            Let's connect on the platforms we actually use.
+          </motion.p>
+          
+          {/* Animated Divider */}
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: "100px" }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 1, delay: 0.7, ease: "easeOut" }}
+            className="h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent mx-auto mt-6"
+          />
+        </motion.div>
+
+        {/* Enhanced Contact Icons with Improved Animations */}
+        <motion.div
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.2 }}
+          variants={{
+            hidden: {},
+            visible: { 
+              transition: { 
+                staggerChildren: 0.2, 
+                delayChildren: 0.3,
+                duration: 0.8
+              } 
+            },
+          }}
+          className="flex gap-6 overflow-x-auto pb-2 snap-x snap-mandatory max-w-full md:justify-center md:overflow-x-visible md:gap-8 md:max-w-3xl mx-auto"
+        >
+          {contacts.map((contact, index) => (
+            <motion.button
+              key={contact.name}
+              onClick={() => handleContactClick(contact)}
+              variants={{
+                hidden: { 
+                  opacity: 0, 
+                  y: 50, 
+                  scale: 0.8,
+                  rotate: -5
+                },
+                visible: { 
+                  opacity: 1, 
+                  y: 0, 
+                  scale: 1,
+                  rotate: 0,
+                  transition: { 
+                    type: 'spring', 
+                    stiffness: 100, 
+                    damping: 15, 
+                    duration: 0.8,
+                    delay: index * 0.1
+                  } 
+                }
+              }}
+              whileHover={{ 
+                scale: 1.1, 
+                y: -8,
+                rotate: 2,
+                transition: { type: "spring", stiffness: 300, damping: 20 }
+              }}
+              whileTap={{ scale: 0.95 }}
+              transition={{ type: "spring", stiffness: 300, damping: 18 }}
+              className={`flex flex-col items-center justify-center bg-white/10 rounded-xl p-6 min-w-[160px] snap-center transition-all duration-300 cursor-pointer shadow-lg backdrop-blur-sm border border-white/10 ${contact.bg} hover:border-blue-500/30`}
+              aria-label={contact.name}
+            >
+              <motion.div
+                whileHover={{ 
+                  scale: 1.2,
+                  rotate: 5,
+                  transition: { type: "spring", stiffness: 400, damping: 15 }
+                }}
+                className="mb-3"
+              >
+                {contact.svg}
+              </motion.div>
+              <motion.span 
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="text-base font-medium text-white opacity-90 select-none"
+              >
+                {contact.name}
+              </motion.span>
+            </motion.button>
+          ))}
+        </motion.div>
+
+        {/* Additional Contact Info */}
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 1, delay: 1, ease: "easeOut" }}
+          className="text-center mt-12"
+        >
+          <motion.p
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className="text-gray-400 text-sm italic"
+          >
+            "Let's build something amazing together"
+          </motion.p>
+        </motion.div>
+      </div>
     </section>
-  )
+  );
 }
