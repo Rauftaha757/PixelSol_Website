@@ -2,7 +2,6 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-import CustomCursor from "./components/CustomCursor"
 import ScrollToTop from "@/components/ScrollToTop";
 import PageTransition from "@/components/PageTransition";
 
@@ -245,7 +244,6 @@ export default function RootLayout({
           <div className="circle-2"></div>
         </div>
         {/* End Global Animated Background */}
-        <CustomCursor />
         <ScrollToTop />
         {/* Page transitions */}
         <PageTransition>{children}</PageTransition>

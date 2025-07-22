@@ -193,14 +193,12 @@ export default function Contact() {
                 hidden: { 
                   opacity: 0, 
                   y: 50, 
-                  scale: 0.8,
-                  rotate: -5
+                  scale: 0.8
                 },
                 visible: { 
                   opacity: 1, 
                   y: 0, 
                   scale: 1,
-                  rotate: 0,
                   transition: { 
                     type: 'spring', 
                     stiffness: 100, 
@@ -211,13 +209,12 @@ export default function Contact() {
                 }
               }}
               whileHover={{ 
-                scale: 1.1, 
-                y: -8,
-                rotate: 2,
+                scale: 1.03, 
+                y: -6,
+                boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
                 transition: { type: "spring", stiffness: 300, damping: 20 }
               }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ type: "spring", stiffness: 300, damping: 18 }}
+              whileTap={{ scale: 0.98 }}
               className={`flex flex-col items-center justify-center bg-white/10 rounded-xl p-6 min-w-[160px] snap-center transition-all duration-300 cursor-pointer shadow-lg backdrop-blur-sm border border-white/10 ${contact.bg} hover:border-blue-500/30`}
               aria-label={contact.name}
             >

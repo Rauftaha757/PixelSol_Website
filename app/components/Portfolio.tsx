@@ -116,29 +116,26 @@ export default function Portfolio() {
                 hidden: { 
                   opacity: 0, 
                   y: 50, 
-                  scale: 0.9,
-                  rotate: -2
+                  scale: 0.9
                 },
                 visible: { 
                   opacity: 1, 
                   y: 0, 
                   scale: 1,
-                  rotate: 0,
                   transition: { 
                     type: 'spring', 
                     stiffness: 100, 
                     damping: 15, 
                     duration: 0.8,
-                    delay: idx * 0.15
+                    delay: idx * 0.1
                   } 
                 }
               }}
-              className="backdrop-blur bg-white/5 border border-white/10 rounded-xl shadow-2xl p-7 flex flex-col gap-4 hover:scale-105 hover:border-blue-400 hover:shadow-blue-500/20 transition-all duration-300 group relative overflow-hidden"
+              className="group card p-8 rounded-2xl bg-[#101624] shadow-lg hover:shadow-blue-400/20 transition-all duration-300 cursor-pointer relative overflow-hidden backdrop-blur-sm border border-white/10 hover:border-blue-500/30"
               whileHover={{ 
-                y: -8,
-                scale: 1.02,
-                rotate: 1,
-                boxShadow: "0 20px 40px rgba(59,130,246,0.15)",
+                y: -6,
+                scale: 1.03,
+                boxShadow: "0 10px 30px rgba(0,0,0,0.1)",
                 transition: { type: "spring", stiffness: 300, damping: 20 }
               }}
               whileTap={{ scale: 0.98 }}

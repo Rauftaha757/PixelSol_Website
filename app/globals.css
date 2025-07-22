@@ -347,3 +347,127 @@
     will-change: transform, opacity;
   }
 }
+
+/* Set default cursor globally */
+* {
+  cursor: default;
+}
+
+/* Use pointer for buttons, links, and clickable elements */
+button, [role="button"], a, input[type="button"], input[type="submit"], label[for], select, summary {
+  cursor: pointer;
+}
+
+/* Subtle interactive hover effect for buttons, CTAs, and .hoverable elements */
+button, .hoverable, .cta {
+  transition: transform 0.2s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.2s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+button:hover, .hoverable:hover, .cta:hover,
+button:focus-visible, .hoverable:focus-visible, .cta:focus-visible {
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.10), 0 1.5px 4px rgba(80,80,120,0.08);
+  outline: none;
+}
+
+/* Ensure accessibility: visible focus for keyboard users */
+button:focus-visible, .hoverable:focus-visible, .cta:focus-visible {
+  box-shadow: 0 0 0 3px rgba(100, 180, 255, 0.25), 0 4px 15px rgba(0,0,0,0.10);
+}
+
+/* Modern, clean box-shadow for all card-style elements */
+.card,
+.box,
+.section-card,
+.feature-box,
+.founders-section,
+.our-approach-box,
+.soft-card,
+.elevated-box,
+.service-box,
+.doctor-card,
+.modern-shadow {
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.card:hover,
+.box:hover,
+.section-card:hover,
+.feature-box:hover,
+.founders-section:hover,
+.our-approach-box:hover,
+.soft-card:hover,
+.elevated-box:hover,
+.service-box:hover,
+.doctor-card:hover,
+.modern-shadow:hover {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+}
+
+/* Special shadow for Our Approach section */
+.approach-section-hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease-in-out;
+}
+
+.approach-section-hover:hover {
+  box-shadow: 0 12px 32px rgba(0, 185, 80, 0.35); /* green accent glow */
+}
+
+.section-grid,
+.card-container,
+.services-wrapper,
+.approach-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+
+/* Founders, elevated, and soft card styles */
+.founders-section,
+.elevated-box,
+.soft-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+}
+
+.founders-section:hover,
+.elevated-box:hover,
+.soft-card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+  transform: scale(1.01);
+}
+
+/* Modern interactive box-shadow for all card/box elements */
+.card, .service-box, .approach-box, .feature-box, .expert-box, 
+.section-box, .founders-section, .elevated-box, .soft-card, 
+.doctor-card, .section-card, .our-approach-box, .hover-shadow {
+  transition: box-shadow 0.3s ease-in-out, transform 0.2s ease-in-out;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.card:hover, .service-box:hover, .approach-box:hover, .feature-box:hover, 
+.expert-box:hover, .section-box:hover, .founders-section:hover, 
+.elevated-box:hover, .soft-card:hover, .doctor-card:hover, 
+.section-card:hover, .our-approach-box:hover, .hover-shadow:hover {
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
+  cursor: pointer;
+}
+
+/* Special green glow for Our Approach section */
+.approach-section-hover {
+  transition: box-shadow 0.3s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.approach-section-hover:hover {
+  box-shadow: 0 12px 32px rgba(0, 185, 80, 0.25);
+}

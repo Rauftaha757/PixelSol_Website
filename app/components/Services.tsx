@@ -137,14 +137,12 @@ export default function Services() {
                 hidden: { 
                   opacity: 0, 
                   y: 50, 
-                  scale: 0.9,
-                  rotate: -2
+                  scale: 0.9
                 },
                 visible: { 
                   opacity: 1, 
                   y: 0, 
                   scale: 1,
-                  rotate: 0,
                   transition: { 
                     type: 'spring', 
                     stiffness: 100, 
@@ -156,10 +154,9 @@ export default function Services() {
               }}
               className="group glass-card p-8 rounded-2xl hover:glow-effect transition-all duration-300 cursor-pointer relative overflow-hidden backdrop-blur-sm border border-white/10 hover:border-blue-500/30"
               whileHover={{ 
-                y: -12,
-                scale: 1.03,
-                rotate: 1,
-                boxShadow: "0 25px 50px rgba(119, 127, 153, 0.25)",
+                y: -6,
+                scale: 1.02,
+                boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
                 transition: { type: "spring", stiffness: 300, damping: 20 }
               }}
               whileTap={{ scale: 0.98 }}
@@ -177,7 +174,6 @@ export default function Services() {
                 <motion.div 
                   className={`w-16 h-16 bg-gradient-to-br ${service.color} rounded-2xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg`}
                   whileHover={{ 
-                    rotate: 5,
                     scale: 1.1,
                     transition: { type: "spring", stiffness: 400, damping: 15 }
                   }}

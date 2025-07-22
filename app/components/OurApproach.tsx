@@ -134,14 +134,12 @@ export default function OurApproach() {
                 hidden: { 
                   opacity: 0, 
                   y: 50, 
-                  scale: 0.9,
-                  rotate: -2
+                  scale: 0.9
                 },
                 visible: { 
                   opacity: 1, 
                   y: 0, 
                   scale: 1,
-                  rotate: 0,
                   transition: { 
                     type: 'spring', 
                     stiffness: 100, 
@@ -151,12 +149,11 @@ export default function OurApproach() {
                   } 
                 }
               }}
-              className="group flex flex-col items-center text-center bg-[#101624] rounded-2xl p-8 shadow-lg hover:shadow-green-400/20 transition-all duration-300 cursor-pointer relative overflow-hidden backdrop-blur-sm border border-white/10 hover:border-green-500/30"
+              className="group flex flex-col items-center justify-center text-center bg-[#101624] rounded-2xl p-8 shadow-lg hover:shadow-green-400/20 transition-all duration-300 cursor-pointer relative overflow-hidden backdrop-blur-sm border border-white/10 hover:border-green-500/30 min-h-[260px] h-full"
               whileHover={{ 
-                scale: 1.06, 
-                y: -8, 
-                rotate: 1,
-                boxShadow: "0 20px 40px rgba(34,197,94,0.15)",
+                scale: 1.02, 
+                y: -6, 
+                boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
                 transition: { type: "spring", stiffness: 300, damping: 20 }
               }}
               whileTap={{ scale: 0.98 }}
@@ -169,25 +166,24 @@ export default function OurApproach() {
                 transition={{ duration: 0.3 }}
               />
 
-              <div className="relative z-10">
+              <div className="relative z-10 flex flex-col items-center justify-center flex-1 w-full h-full">
                 <motion.div
-                  className={`w-16 h-16 mb-4 flex items-center justify-center rounded-full bg-gradient-to-br ${step.color} group-hover:scale-110 transition-transform duration-300 shadow-lg`}
+                  className={`flex items-center justify-center w-16 h-16 mb-4 rounded-full bg-gradient-to-br ${step.color} group-hover:scale-110 transition-transform duration-300 shadow-lg`}
                   whileHover={{ 
-                    rotate: 8,
                     scale: 1.1,
                     transition: { type: "spring", stiffness: 400, damping: 15 }
                   }}
                 >
                   <motion.div
+                    className="flex items-center justify-center w-8 h-8"
                     whileHover={{ scale: 1.2 }}
                     transition={{ type: "spring", stiffness: 300 }}
                   >
                     <step.icon className="w-8 h-8 text-white drop-shadow-lg" />
                   </motion.div>
                 </motion.div>
-                
                 <motion.h3 
-                  className="text-lg font-semibold text-white mb-2 group-hover:text-green-400 transition-colors"
+                  className="text-lg font-semibold text-white mt-3 group-hover:text-green-400 transition-colors"
                   whileHover={{ x: 3 }}
                   transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >

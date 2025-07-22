@@ -76,7 +76,7 @@ export default function WhoWeAre() {
             hidden: {},
             visible: { transition: { staggerChildren: 0.18 } },
           }}
-          className="flex flex-col sm:flex-row justify-center items-center gap-10 md:gap-16 mb-16"
+          className="flex flex-col sm:flex-row justify-center items-center gap-10 md:gap-16 mb-16 min-h-[207px]"
         >
           {founders.map((founder, idx) => (
             <motion.div
