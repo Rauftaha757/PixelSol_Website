@@ -133,7 +133,7 @@ export default function Portfolio() {
                   } 
                 }
               }}
-              className="backdrop-blur bg-white/5 border border-white/10 rounded-xl shadow-2xl p-7 flex flex-col gap-4 hover:scale-105 hover:border-blue-400 hover:shadow-blue-500/20 transition-all duration-300 group relative overflow-hidden"
+              className="backdrop-blur bg-white/5 border border-white/10 rounded-xl shadow-2xl p-7 flex flex-col gap-4 hover:scale-105 hover:border-blue-400 hover:shadow-blue-500/20 transition-all duration-300 group relative overflow-hidden min-h-[320px]"
               whileHover={{ 
                 y: -8,
                 scale: 1.02,
