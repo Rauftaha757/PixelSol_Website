@@ -37,7 +37,7 @@ export default function Hero() {
           }}
         />
 
-        {/* Additional floating background elements */}
+        {/* Floating background elements */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -50,9 +50,9 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Enhanced Floating particles */}
+      {/* Floating particles */}
       <div className="absolute inset-0">
-        {[...Array(40)].map((_, i) => (
+        {[...Array(20)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-cool-blue rounded-full opacity-30"
@@ -76,7 +76,7 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* Enhanced Floating geometric shapes */}
+      {/* Floating geometric shapes */}
       <motion.div
         className="absolute bottom-20 left-20 w-32 h-32 border border-cool-blue/20 rounded-full"
         animate={{
@@ -178,7 +178,6 @@ export default function Hero() {
               transition: { type: "spring", stiffness: 300, damping: 20 }
             }}
             whileTap={{ scale: 0.95 }}
-            data-cursor-text="Let's Talk"
           >
             <span>Let's Build Together</span>
             <motion.div

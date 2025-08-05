@@ -2,7 +2,6 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import "./globals.css"
-import CustomCursor from "./components/CustomCursor"
 import ScrollToTop from "@/components/ScrollToTop";
 import PageTransition from "@/components/PageTransition";
 
@@ -74,11 +73,6 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
-  verification: {
-    google: 'your-google-verification-code',
-    yandex: 'your-yandex-verification-code',
-    yahoo: 'your-yahoo-verification-code',
-  },
   category: 'technology',
   classification: 'business',
   other: {
@@ -97,8 +91,6 @@ export default function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const pathname = typeof window !== 'undefined' ? window.location.pathname : '';
-  
   // Structured data for SEO
   const structuredData = {
     "@context": "https://schema.org",
@@ -222,17 +214,11 @@ export default function RootLayout({
                 deferredPrompt = e;
                 console.log('PWA install prompt ready');
               });
-
-              // Analytics (replace with your actual analytics code)
-              window.addEventListener('load', function() {
-                // Google Analytics or other analytics code here
-                console.log('Page loaded - analytics ready');
-              });
             `,
           }}
         />
       </head>
-      <body className={`${inter.className} antialiased cursor-none`}>
+      <body className={`${inter.className} antialiased`}>
         {/* Global Animated Background */}
         <div className="fixed inset-0 -z-10">
           <div className="absolute inset-0 bg-gradient-to-br from-midnight-navy via-charcoal-black to-deep-slate" />
@@ -245,7 +231,6 @@ export default function RootLayout({
           <div className="circle-2"></div>
         </div>
         {/* End Global Animated Background */}
-        <CustomCursor />
         <ScrollToTop />
         {/* Page transitions */}
         <PageTransition>{children}</PageTransition>

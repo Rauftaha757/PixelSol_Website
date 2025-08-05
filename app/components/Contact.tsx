@@ -75,7 +75,7 @@ export default function Contact() {
 
   return (
     <section id="contact" className="py-20 bg-[#0b0f19] text-white relative overflow-hidden">
-      {/* Background Animation for Contact Section */}
+      {/* Background Animation */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -122,98 +122,44 @@ export default function Contact() {
       )}
 
       <div className="relative z-10">
-        {/* Enhanced Title Section with Staggered Animations */}
+        {/* Title Section */}
         <motion.div
-          initial={{ opacity: 0, y: 80 }}
+          initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
+          transition={{ duration: 1, ease: "easeOut" }}
           className="text-center mb-12"
         >
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
+          <motion.h2
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="mb-4"
+            className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
           >
-            <motion.h2
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-              className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
-            >
-              Get in Touch
-            </motion.h2>
-          </motion.div>
+            Get in Touch
+          </motion.h2>
           
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+            transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
             className="text-lg text-gray-300 max-w-xl mx-auto mb-2"
           >
             Let's connect on the platforms we actually use.
           </motion.p>
-          
-          {/* Animated Divider */}
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: "100px" }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 1, delay: 0.7, ease: "easeOut" }}
-            className="h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent mx-auto mt-6"
-          />
         </motion.div>
 
-        {/* Enhanced Contact Icons with Improved Animations */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={{
-            hidden: {},
-            visible: { 
-              transition: { 
-                staggerChildren: 0.2, 
-                delayChildren: 0.3,
-                duration: 0.8
-              } 
-            },
-          }}
-          className="flex gap-6 overflow-x-auto pb-2 snap-x snap-mandatory max-w-full md:justify-center md:overflow-x-visible md:gap-8 md:max-w-3xl mx-auto"
-        >
+        {/* Contact Icons */}
+        <div className="flex gap-6 overflow-x-auto pb-2 snap-x snap-mandatory max-w-full md:justify-center md:overflow-x-visible md:gap-8 md:max-w-3xl mx-auto">
           {contacts.map((contact, index) => (
             <motion.button
               key={contact.name}
               onClick={() => handleContactClick(contact)}
-              variants={{
-                hidden: { 
-                  opacity: 0, 
-                  y: 50, 
-                  scale: 0.8,
-                  rotate: -5
-                },
-                visible: { 
-                  opacity: 1, 
-                  y: 0, 
-                  scale: 1,
-                  rotate: 0,
-                  transition: { 
-                    type: 'spring', 
-                    stiffness: 100, 
-                    damping: 15, 
-                    duration: 0.8,
-                    delay: index * 0.1
-                  } 
-                }
-              }}
               whileHover={{ 
                 scale: 1.1, 
                 y: -8,
-                rotate: 2,
                 transition: { type: "spring", stiffness: 300, damping: 20 }
               }}
               whileTap={{ scale: 0.95 }}
@@ -224,40 +170,30 @@ export default function Contact() {
               <motion.div
                 whileHover={{ 
                   scale: 1.2,
-                  rotate: 5,
                   transition: { type: "spring", stiffness: 400, damping: 15 }
                 }}
                 className="mb-3"
               >
                 {contact.svg}
               </motion.div>
-              <motion.span 
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-                className="text-base font-medium text-white opacity-90 select-none"
-              >
+              <span className="text-base font-medium text-white opacity-90 select-none">
                 {contact.name}
-              </motion.span>
+              </span>
             </motion.button>
           ))}
-        </motion.div>
+        </div>
 
         {/* Additional Contact Info */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1, delay: 1, ease: "easeOut" }}
-          className="text-center mt-12"
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="text-center max-w-2xl mx-auto mt-8"
         >
-          <motion.p
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="text-gray-400 text-sm italic"
-          >
+          <p className="text-gray-400 text-sm italic">
             "Let's build something amazing together"
-          </motion.p>
+          </p>
         </motion.div>
       </div>
     </section>

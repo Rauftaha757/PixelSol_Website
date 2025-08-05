@@ -34,7 +34,6 @@ export default function Navigation({ activeSection }: NavigationProps) {
             whileTap={{ scale: 0.95 }}
             className="text-2xl font-bold gradient-text cursor-pointer"
             onClick={() => scrollToSection("home")}
-            data-cursor-text="Home"
           >
             PixelSolve
           </motion.div>
@@ -52,7 +51,6 @@ export default function Navigation({ activeSection }: NavigationProps) {
                   y: -2,
                 }}
                 whileTap={{ scale: 0.95 }}
-                data-cursor-text={item.label}
               >
                 {item.label}
                 
@@ -84,7 +82,6 @@ export default function Navigation({ activeSection }: NavigationProps) {
           >
             <button 
               className="text-fog-white hover:text-cool-blue transition-colors p-2"
-              data-cursor-text="Menu"
               aria-label="Open menu"
               onClick={() => setMobileOpen((open) => !open)}
             >
@@ -112,7 +109,6 @@ export default function Navigation({ activeSection }: NavigationProps) {
                   setMobileOpen(false);
                 }}
                 className={`w-full text-left px-4 py-2 rounded text-lg font-medium transition-colors duration-200 ${activeSection === item.id ? "text-cool-blue" : "text-soft-gray hover:text-fog-white"}`}
-                data-cursor-text={item.label}
               >
                 {item.label}
               </button>

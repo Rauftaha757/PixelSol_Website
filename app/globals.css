@@ -50,6 +50,7 @@
 
   * {
     @apply border-border;
+    box-sizing: border-box;
   }
 
   body {
@@ -59,32 +60,9 @@
     overflow-x: hidden;
   }
 
-  /* Enhanced Smooth scrolling */
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 80px; /* Account for fixed navbar */
-  }
-
-  /* Performance optimizations */
-  * {
-    box-sizing: border-box;
-  }
-
-  /* Optimize animations for performance */
-  .animate-optimized {
-    will-change: transform, opacity;
-    backface-visibility: hidden;
-    transform: translateZ(0);
-  }
-
-  /* Hide scrollbar for custom cursor */
-  body {
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-
-  body::-webkit-scrollbar {
-    display: none;
+    scroll-padding-top: 80px;
   }
 
   /* Animated Background Elements */
@@ -125,7 +103,6 @@
     animation-duration: 30s;
   }
 
-  /* Square element */
   .animated-bg .square {
     position: absolute;
     width: 150px;
@@ -138,7 +115,6 @@
     animation-delay: -5s;
   }
 
-  /* Additional floating elements */
   .animated-bg .circle-1 {
     position: absolute;
     width: 100px;
@@ -183,7 +159,6 @@
     background-size: 200% 200%;
   }
 
-  /* Enhanced animations */
   .animate-float {
     animation: float 6s ease-in-out infinite;
   }
@@ -200,7 +175,6 @@
     animation: spin 8s linear infinite;
   }
 
-  /* Magnetic effect */
   .magnetic {
     transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   }
@@ -209,7 +183,6 @@
     transform: scale(1.05);
   }
 
-  /* Text reveal animation */
   .text-reveal {
     overflow: hidden;
   }
@@ -220,13 +193,11 @@
     animation: textReveal 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
   }
 
-  /* Parallax effect */
   .parallax {
     transform: translateZ(0);
     will-change: transform;
   }
 
-  /* Hover lift effect */
   .hover-lift {
     transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.3s cubic-bezier(0.23, 1, 0.32, 1);
   }
@@ -236,7 +207,6 @@
     box-shadow: 0 20px 40px rgba(119, 127, 153, 0.2);
   }
 
-  /* Glow on hover */
   .glow-on-hover {
     transition: box-shadow 0.3s ease;
   }
@@ -245,7 +215,6 @@
     box-shadow: 0 0 20px rgba(119, 127, 153, 0.4);
   }
 
-  /* Stagger animation for children */
   .stagger-children > * {
     opacity: 0;
     transform: translateY(20px);
@@ -258,24 +227,6 @@
   .stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
   .stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
   .stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
-}
-
-::-webkit-scrollbar-track {
-  background: #131521;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #373c4e;
-  border-radius: 4px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #777f99;
 }
 
 /* Keyframe animations */
@@ -317,7 +268,6 @@
   }
 }
 
-/* Shimmer effect */
 .shimmer {
   background: linear-gradient(90deg, transparent, rgba(119, 127, 153, 0.2), transparent);
   background-size: 200% 100%;

@@ -39,7 +39,7 @@ const steps = [
 export default function OurApproach() {
   return (
     <section className="py-20 bg-[#0b0f19] relative overflow-hidden">
-      {/* Enhanced Background Animation */}
+      {/* Background Animation */}
       <motion.div
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
@@ -54,37 +54,29 @@ export default function OurApproach() {
       </motion.div>
 
       <div className="container mx-auto px-6 relative z-10">
-        {/* Enhanced Title Section */}
+        {/* Title Section */}
         <motion.div
-          initial={{ opacity: 0, y: 80 }}
+          initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
+          transition={{ duration: 1, ease: "easeOut" }}
           className="text-center mb-16"
         >
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
+          <motion.span 
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="mb-4"
+            className="block text-sm font-semibold uppercase tracking-widest text-green-400 mb-4"
           >
-            <motion.span 
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 0.8, delay: 0.3, ease: "easeOut" }}
-              className="block text-sm font-semibold uppercase tracking-widest text-green-400 mb-4"
-            >
-              OUR AI DEVELOPMENT PROCESS
-            </motion.span>
-          </motion.div>
+            OUR AI DEVELOPMENT PROCESS
+          </motion.span>
           
           <motion.h2 
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
+            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
             className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
           >
             Our Approach to Building Intelligent Systems
@@ -94,125 +86,56 @@ export default function OurApproach() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
-            className="text-lg text-gray-300 max-w-2xl mx-auto mb-6"
+            transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
+            className="text-lg text-gray-300 max-w-2xl mx-auto"
           >
             From data collection to deployment, we follow a refined process to ensure accuracy, scalability, and real-world value.
           </motion.p>
-
-          {/* Animated Divider */}
-          <motion.div
-            initial={{ width: 0 }}
-            whileInView={{ width: "160px" }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
-            className="h-0.5 bg-gradient-to-r from-transparent via-green-500 to-transparent mx-auto"
-          />
         </motion.div>
 
-        {/* Enhanced Steps Grid */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={{
-            hidden: {},
-            visible: { 
-              transition: { 
-                staggerChildren: 0.15, 
-                delayChildren: 0.3,
-                duration: 0.8
-              } 
-            },
-          }}
-          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 gap-8"
-        >
+        {/* Steps Grid - Fixed alignment */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {steps.map((step, idx) => (
             <motion.div
               key={step.title}
-              variants={{
-                hidden: { 
-                  opacity: 0, 
-                  y: 50, 
-                  scale: 0.9,
-                  rotate: -2
-                },
-                visible: { 
-                  opacity: 1, 
-                  y: 0, 
-                  scale: 1,
-                  rotate: 0,
-                  transition: { 
-                    type: 'spring', 
-                    stiffness: 100, 
-                    damping: 15, 
-                    duration: 0.8,
-                    delay: idx * 0.1
-                  } 
-                }
-              }}
-              className="group flex flex-col items-center text-center bg-[#101624] rounded-2xl p-8 shadow-lg hover:shadow-green-400/20 transition-all duration-300 cursor-pointer relative overflow-hidden backdrop-blur-sm border border-white/10 hover:border-green-500/30"
               whileHover={{ 
-                scale: 1.06, 
-                y: -8, 
-                rotate: 1,
+                scale: 1.02, 
+                y: -4, 
                 boxShadow: "0 20px 40px rgba(34,197,94,0.15)",
                 transition: { type: "spring", stiffness: 300, damping: 20 }
               }}
               whileTap={{ scale: 0.98 }}
+              className="group flex flex-col items-center text-center bg-[#101624] rounded-2xl p-8 shadow-lg hover:shadow-green-400/20 transition-all duration-300 cursor-pointer relative overflow-hidden backdrop-blur-sm border border-white/10 hover:border-green-500/30 h-full"
             >
               {/* Hover background effect */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                initial={{ scale: 0 }}
-                whileHover={{ scale: 1 }}
-                transition={{ duration: 0.3 }}
-              />
+              <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              <div className="relative z-10">
-                <motion.div
-                  className={`w-16 h-16 mb-4 flex items-center justify-center rounded-full bg-gradient-to-br ${step.color} group-hover:scale-110 transition-transform duration-300 shadow-lg`}
-                  whileHover={{ 
-                    rotate: 8,
-                    scale: 1.1,
-                    transition: { type: "spring", stiffness: 400, damping: 15 }
-                  }}
+              <div className="relative z-10 flex flex-col items-center justify-center h-full">
+                <div
+                  className={`w-16 h-16 mb-6 flex items-center justify-center rounded-full bg-gradient-to-br ${step.color} group-hover:scale-110 transition-transform duration-300 shadow-lg flex-shrink-0`}
                 >
-                  <motion.div
-                    whileHover={{ scale: 1.2 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                  >
-                    <step.icon className="w-8 h-8 text-white drop-shadow-lg" />
-                  </motion.div>
-                </motion.div>
+                  <step.icon className="w-8 h-8 text-white drop-shadow-lg" />
+                </div>
                 
-                <motion.h3 
-                  className="text-lg font-semibold text-white mb-2 group-hover:text-green-400 transition-colors"
-                  whileHover={{ x: 3 }}
-                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
-                >
+                <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-green-400 transition-colors leading-tight">
                   {step.title}
-                </motion.h3>
+                </h3>
               </div>
             </motion.div>
           ))}
-        </motion.div>
+        </div>
 
         {/* Additional Approach Info */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1, delay: 1.2, ease: "easeOut" }}
-          className="text-center mt-16"
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="text-center max-w-2xl mx-auto mt-8"
         >
-          <motion.p
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="text-gray-400 text-sm italic"
-          >
+          <p className="text-gray-400 text-sm italic">
             "Systematic approach to intelligent solutions"
-          </motion.p>
+          </p>
         </motion.div>
       </div>
     </section>

@@ -64,9 +64,10 @@ export default function WhoWeAre() {
             transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
             className="text-lg text-gray-300 max-w-2xl mx-auto"
           >
-            We’re three close friends who founded a startup to build next-gen AI and software experiences. We code, learn, and grow together — and we love what we do.
+            We're three close friends who founded a startup to build next-gen AI and software experiences. We code, learn, and grow together — and we love what we do.
           </motion.p>
         </motion.div>
+        
         {/* Founders Section */}
         <motion.div
           initial="hidden"
@@ -98,6 +99,7 @@ export default function WhoWeAre() {
             </motion.div>
           ))}
         </motion.div>
+        
         {/* Quote Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -107,7 +109,7 @@ export default function WhoWeAre() {
           className="text-center max-w-2xl mx-auto mt-8"
         >
           <blockquote className="italic text-lg text-gray-400 border-l-4 border-green-400 pl-6">
-            “We’re not just building software — we’re building a future, together.”
+            "We're not just building software — we're building a future, together."
           </blockquote>
         </motion.div>
       </div>
