@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useState } from "react"
-import { Code, Bot, Server, Briefcase, User, Building2 } from "lucide-react"
+import { Code, Bot, Server, Briefcase, User, Building2, Coffee, Zap, Sparkles } from "lucide-react"
 
 const team = [
   {
@@ -53,12 +53,35 @@ const team = [
     name: "Abdullah Shoaib",
     role: "Solutions Architect",
     emoji: "🏗️",
-    blurb: "I design robust, scalable technical solutions that align with business goals. From system architecture to technology strategy, I ensure our solutions built to last.",
+    blurb: "I design robust, scalable technical solutions that align with business goals. From system architecture to technology strategy, I ensure our solutions are built to last.",
     image: "/mehdi.jpeg",
     fallbackIcon: Building2,
     icon: Building2,
     color: "from-red-500 to-rose-500",
     borderColor: "#EF4444",
+  },
+  {
+    name: "Ali Lashari",
+    role: "Chief Chai Officer",
+    emoji: "☕",
+    blurb: "I fuel our team with unlimited chai and good vibes. The master of morale who keeps the creativity flowing one cup at a time.",
+    image: "/ali.jpeg",
+    fallbackIcon: Coffee,
+    icon: Coffee,
+    color: "from-amber-500 to-yellow-500",
+    borderColor: "#F59E0B",
+    special: true,
+  },
+  {
+    name: "Arham Nasir",
+    role: "Engineering Team Lead",
+    emoji: "⚡",
+    blurb: "I manage and mentor our development teams, ensuring projects are delivered efficiently while maintaining high-quality standards and innovation.",
+    image: "/arham.jpeg",
+    fallbackIcon: Zap,
+    icon: Zap,
+    color: "from-indigo-500 to-violet-500",
+    borderColor: "#8B5CF6",
   },
 ]
 
@@ -72,7 +95,7 @@ function TeamMemberCard({ member, idx }: { member: typeof team[0], idx: number }
       initial={{ opacity: 0, y: 40, scale: 0.95 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, delay: idx * 0.1, ease: "easeOut" }}
+      transition={{ duration: 0.6, delay: idx * 0.08, ease: "easeOut" }}
       whileHover={{ y: -8, scale: 1.02 }}
       className="group"
     >
@@ -89,10 +112,51 @@ function TeamMemberCard({ member, idx }: { member: typeof team[0], idx: number }
           <member.icon className="w-5 h-5 text-white" />
         </motion.div>
 
+        {/* Special badge for CCO */}
+        {member.special && (
+          <motion.div
+            initial={{ scale: 0, rotate: -180 }}
+            whileInView={{ scale: 1, rotate: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ delay: idx * 0.1 + 0.4, type: "spring", stiffness: 200 }}
+            className="absolute -top-2 -right-2 z-20"
+          >
+            <div className="relative">
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+                className="absolute inset-0 bg-gradient-to-r from-amber-400 via-orange-500 to-red-500 rounded-full blur-md"
+              />
+              <div className="relative w-10 h-10 bg-gradient-to-br from-amber-400 to-orange-500 rounded-full flex items-center justify-center shadow-lg">
+                <Sparkles className="w-5 h-5 text-white" strokeWidth={2} />
+              </div>
+            </div>
+          </motion.div>
+        )}
+
         {/* Image container */}
         <div className="relative mb-4">
+          {/* Rotating dashed ring */}
           <motion.div
-            className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 shadow-xl relative flex items-center justify-center"
+            animate={{ rotate: 360 }}
+            transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+            className="absolute inset-0 rounded-full border-2 border-dashed opacity-20"
+            style={{
+              borderColor: member.borderColor,
+              transform: "scale(1.15)",
+            }}
+          />
+
+          {/* Pulsing ring */}
+          <motion.div
+            animate={{ scale: [1, 1.15, 1], opacity: [0.4, 0, 0.4] }}
+            transition={{ duration: 2.5, repeat: Infinity }}
+            className="absolute inset-0 rounded-full border-2"
+            style={{ borderColor: member.borderColor }}
+          />
+
+          <motion.div
+            className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 shadow-xl relative flex items-center justify-center bg-[#1a1d2d]"
             style={{ borderColor: member.borderColor }}
             whileHover={{ scale: 1.05, rotate: 2 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -110,6 +174,7 @@ function TeamMemberCard({ member, idx }: { member: typeof team[0], idx: number }
               />
             )}
           </motion.div>
+
           {/* Emoji badge */}
           <motion.div
             className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-[#1a1d2d] border-2 border-white/10 flex items-center justify-center text-lg shadow-lg"
@@ -185,12 +250,12 @@ export default function WhoWeAre() {
             transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
             className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
           >
-            We are a passionate team of five innovators who founded PixelSolve to build next generation AI and software experiences. We combine our expertise to deliver exceptional results.
+            We are a passionate team of innovators who founded PixelSolve to build next generation AI and software experiences. We combine our expertise to deliver exceptional results.
           </motion.p>
         </motion.div>
 
-        {/* Team Section - Grid Layout for 5 Members */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-7xl mx-auto mb-16">
+        {/* Team Section - Grid Layout for 7 Members */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 max-w-7xl mx-auto mb-16">
           {team.map((member, idx) => (
             <TeamMemberCard key={member.name} member={member} idx={idx} />
           ))}
@@ -205,8 +270,8 @@ export default function WhoWeAre() {
           className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12"
         >
           {[
-            { number: "5+", label: "Team Members" },
-            { number: "10+", label: "Projects Delivered" },
+            { number: "7", label: "Team Members" },
+            { number: "20+", label: "Projects Delivered" },
             { number: "100%", label: "Client Satisfaction" },
             { number: "24/7", label: "Support Available" },
           ].map((stat, idx) => (
