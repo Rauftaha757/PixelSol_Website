@@ -2,111 +2,114 @@
 
 import { motion } from "framer-motion"
 import { useState } from "react"
-import { Code, Bot, Server, Briefcase, User, Building2, Coffee, Zap, Linkedin, Mail, Github } from "lucide-react"
+import { Mail as MailIcon } from "lucide-react"
 
-const coreTeam = [
+const team = [
   {
     name: "Taha Rauf",
-    role: "Full Stack Developer & Product Architect",
-    blurb: "Bringing ideas to life with clean code and intuitive design. Merging frontend elegance with backend strength to create seamless digital experiences.",
+    role: "Co-Founder & CTO",
+    expertise: "Product Architecture, Full Stack Development",
+    blurb: "Architecting scalable solutions and leading technical innovation. 5+ years building production systems.",
     image: "/taha.jpeg",
-    icon: Code,
-    gradient: "from-blue-500 to-cyan-500",
+    initials: "TR",
   },
   {
     name: "Hammad Sikandar",
-    role: "AI/ML Engineer",
-    blurb: "Building intelligent systems that learn, adapt, and solve real-world problems using cutting-edge artificial intelligence and machine learning technologies.",
+    role: "Co-Founder & Head of AI",
+    expertise: "Machine Learning, AI Engineering, Python",
+    blurb: "Building intelligent systems that solve real problems. Expert in LLMs, computer vision, and data science.",
     image: "/hammad.jpeg",
-    icon: Bot,
-    gradient: "from-purple-500 to-pink-500",
+    initials: "HS",
   },
   {
     name: "Babar Shaheen",
-    role: "DevOps & Backend Engineer",
-    blurb: "Ensuring everything runs smoothly and securely. From APIs to servers to cloud infrastructure, keeping systems reliable and scalable.",
+    role: "VP of Infrastructure",
+    expertise: "DevOps, Cloud Architecture, Security",
+    blurb: "Ensuring 99.9% uptime and scalable infrastructure. AWS certified with expertise in microservices.",
     image: "/babar.jpg",
-    icon: Server,
-    gradient: "from-green-500 to-emerald-500",
+    initials: "BS",
   },
   {
     name: "Syed Saad Kamal",
-    role: "Business Developer",
-    blurb: "Bridging the gap between technology and business. Turning innovative ideas into successful ventures and building strategic partnerships that drive growth.",
+    role: "Head of Growth",
+    expertise: "Business Strategy, Partnerships, Product",
+    blurb: "Driving business development and strategic partnerships. MBA with track record of scaling tech startups.",
     image: "/saad.jpeg",
-    icon: Briefcase,
-    gradient: "from-orange-500 to-amber-500",
+    initials: "SK",
   },
   {
     name: "Abdullah Shoaib",
-    role: "Solutions Architect",
-    blurb: "Designing robust, scalable technical solutions that align with business goals. From system architecture to technology strategy, ensuring solutions are built to last.",
+    role: "Chief Architect",
+    expertise: "System Design, Technical Strategy",
+    blurb: "Designing enterprise-grade solutions. Former tech lead with experience in fintech and healthcare systems.",
     image: "/mehdi.jpeg",
-    icon: Building2,
-    gradient: "from-red-500 to-rose-500",
+    initials: "AS",
   },
   {
     name: "Arham Nasir",
-    role: "Engineering Team Lead",
-    blurb: "Managing and mentoring development teams, ensuring projects are delivered efficiently while maintaining high-quality standards and innovation.",
+    role: "Engineering Lead",
+    expertise: "Team Management, Agile, Delivery",
+    blurb: "Leading engineering teams to deliver quality software on time. Certified Scrum Master with 10+ years experience.",
     image: "/arham.jpeg",
-    icon: Zap,
-    gradient: "from-indigo-500 to-violet-500",
+    initials: "AN",
+  },
+  {
+    name: "Ali Lashari",
+    role: "Chief Chai Officer",
+    expertise: "Team Culture, Morale, Beverages",
+    blurb: "Keeping the team energized and focused. Ensuring the chai never runs dry and morale stays high.",
+    image: "/ali.jpeg",
+    initials: "AL",
   },
 ]
 
-function TeamCard({ member, idx }: { member: typeof coreTeam[0], idx: number }) {
+function TeamMember({ member, idx }: { member: typeof team[0], idx: number }) {
   const [imageError, setImageError] = useState(false)
-  const Icon = member.icon
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
+      initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.5, delay: idx * 0.08, ease: "easeOut" }}
+      viewport={{ once: true, amount: 0.1 }}
+      transition={{ duration: 0.4, delay: idx * 0.05 }}
       className="group"
     >
-      <div className="bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-white/10 hover:border-white/20 transition-all duration-300 h-full flex flex-col">
-        {/* Header with icon and name */}
-        <div className="flex items-start gap-4 mb-4">
-          <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${member.gradient} flex items-center justify-center flex-shrink-0 shadow-lg`}>
+      <div className="relative bg-[#0d0f14] rounded-xl p-6 border border-white/5 hover:border-white/10 transition-all duration-300">
+        {/* Top accent line */}
+        <div className="absolute top-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-white/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+
+        <div className="flex gap-5">
+          {/* Photo/Initials */}
+          <div className="flex-shrink-0">
             {imageError || !member.image ? (
-              <Icon className="w-7 h-7 text-white" strokeWidth={2} />
+              <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-[#1a1d2d] to-[#0d0f14] border border-white/10 flex items-center justify-center">
+                <span className="text-xl font-bold text-white/60">{member.initials}</span>
+              </div>
             ) : (
               <img
                 src={member.image}
                 alt={member.name}
-                className="w-full h-full rounded-xl object-cover"
+                className="w-20 h-20 rounded-xl object-cover"
                 onError={() => setImageError(true)}
               />
             )}
           </div>
+
+          {/* Content */}
           <div className="flex-1 min-w-0">
-            <h3 className="text-white font-semibold text-lg leading-tight">{member.name}</h3>
-            <p className={`text-sm bg-gradient-to-r ${member.gradient} bg-clip-text text-transparent font-medium`}>
-              {member.role}
-            </p>
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <h3 className="text-white font-semibold text-base mb-0.5">{member.name}</h3>
+                <p className="text-white/60 text-xs uppercase tracking-wide mb-2">{member.role}</p>
+                <p className="text-white/40 text-xs mb-3">{member.expertise}</p>
+              </div>
+            </div>
+            <p className="text-gray-500 text-sm leading-relaxed line-clamp-2">{member.blurb}</p>
           </div>
         </div>
 
-        {/* Description */}
-        <p className="text-gray-400 text-sm leading-relaxed flex-grow">
-          {member.blurb}
-        </p>
-
-        {/* Social links placeholder */}
-        <div className="flex gap-2 mt-4 pt-4 border-t border-white/10">
-          <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
-            <Github className="w-4 h-4 text-gray-500" />
-          </div>
-          <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
-            <Linkedin className="w-4 h-4 text-gray-500" />
-          </div>
-          <div className="w-8 h-8 rounded-lg bg-white/5 flex items-center justify-center">
-            <Mail className="w-4 h-4 text-gray-500" />
-          </div>
-        </div>
+        {/* Bottom accent line */}
+        <div className="absolute bottom-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent" />
       </div>
     </motion.div>
   )
@@ -114,62 +117,50 @@ function TeamCard({ member, idx }: { member: typeof coreTeam[0], idx: number }) 
 
 export default function WhoWeAre() {
   return (
-    <section id="about" className="py-24 bg-gradient-to-b from-[#0b0f19] to-[#0f111a] relative overflow-hidden">
-      {/* Subtle background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-20 right-10 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-10 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl" />
-      </div>
-
-      <div className="container mx-auto px-6 relative z-10">
+    <section id="about" className="py-24 bg-[#0a0c10] relative">
+      <div className="container mx-auto px-6">
         {/* Header */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, ease: "easeOut" }}
-          className="text-center mb-16"
+          transition={{ duration: 0.6 }}
+          className="mb-16"
         >
-          <span className="inline-block px-4 py-2 rounded-full bg-white/5 border border-white/10 text-xs font-semibold uppercase tracking-widest text-gray-400 mb-6">
-            The Team
-          </span>
-          <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-            Meet the People Behind PixelSolve
-          </h2>
-          <p className="text-gray-400 max-w-2xl mx-auto text-lg">
-            A small team of passionate individuals building meaningful software solutions.
+          <p className="text-white/40 text-sm uppercase tracking-widest mb-4">Leadership</p>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-4">Built by Experts, Driven by Excellence</h2>
+          <p className="text-gray-400 max-w-2xl text-lg">
+            Our team brings together decades of combined experience from top tech companies and startups.
           </p>
         </motion.div>
 
         {/* Team Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mb-16">
-          {coreTeam.map((member, idx) => (
-            <TeamCard key={member.name} member={member} idx={idx} />
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto mb-16">
+          {team.map((member, idx) => (
+            <TeamMember key={member.name} member={member} idx={idx} />
           ))}
         </div>
 
-        {/* Join Us CTA */}
+        {/* Values */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-center max-w-2xl mx-auto"
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto"
         >
-          <div className="bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-2xl p-8 border border-white/10">
-            <h3 className="text-xl font-semibold text-white mb-2">Join Our Team</h3>
-            <p className="text-gray-400 text-sm mb-4">
-              We're always looking for talented people who share our passion for building great products.
-            </p>
-            <a
-              href="mailto:connect@pixelsolve.co"
-              className="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 rounded-xl text-white text-sm font-medium transition-all duration-300"
-            >
-              <Mail className="w-4 h-4" />
-              Get in touch
-            </a>
-          </div>
+          {[
+            { title: "Innovation First", desc: "We push boundaries and explore new technologies." },
+            { title: "Quality Code", desc: "Clean, maintainable, and well-tested solutions." },
+            { title: "Client Focus", desc: "Your success is our primary metric." },
+          ].map((value, idx) => (
+            <div key={value.title} className="text-center p-6">
+              <h4 className="text-white font-semibold mb-2">{value.title}</h4>
+              <p className="text-gray-500 text-sm">{value.desc}</p>
+            </div>
+          ))}
         </motion.div>
+
       </div>
     </section>
   )
