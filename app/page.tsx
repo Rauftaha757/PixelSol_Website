@@ -5,9 +5,8 @@ import { motion, AnimatePresence } from "framer-motion"
 import Navigation from "./components/Navigation"
 import Hero from "./components/Hero"
 import Services from "./components/Services"
+import Process from "./components/Process"
 import Portfolio from "./components/Portfolio"
-import ClientWork from "./components/ClientWork"
-import OurApproach from "./components/OurApproach"
 import About from "./components/About"
 import Contact from "./components/Contact"
 
@@ -26,7 +25,7 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["home", "services", "portfolio", "clients", "about", "contact"]
+      const sections = ["home", "services", "process", "portfolio", "about", "contact"]
       const scrollPosition = window.scrollY + 100
 
       for (const section of sections) {
@@ -106,9 +105,8 @@ export default function Home() {
             <Navigation activeSection={activeSection} />
             <Hero />
             <Services />
-            <OurApproach />
+            <Process />
             <Portfolio />
-            <ClientWork />
             <About />
             <Contact />
           </motion.main>

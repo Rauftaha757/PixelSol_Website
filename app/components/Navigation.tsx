@@ -13,8 +13,8 @@ export default function Navigation({ activeSection }: NavigationProps) {
   const navItems = [
     { id: "home", label: "Home" },
     { id: "services", label: "Services" },
+    { id: "process", label: "Process" },
     { id: "portfolio", label: "Portfolio" },
-    { id: "clients", label: "Clients" },
     { id: "about", label: "About" },
     { id: "contact", label: "Contact" },
   ]
