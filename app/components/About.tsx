@@ -72,7 +72,7 @@ function TeamMemberCard({ member, idx }: { member: typeof team[0], idx: number }
       initial={{ opacity: 0, y: 40, scale: 0.95 }}
       whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6, delay: idx * 0.12, ease: "easeOut" }}
+      transition={{ duration: 0.6, delay: idx * 0.1, ease: "easeOut" }}
       whileHover={{ y: -8, scale: 1.02 }}
       className="group"
     >
