@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useState } from "react"
-import { Code, Bot, Server, Briefcase, User } from "lucide-react"
+import { Code, Bot, Server, Briefcase, User, Architecture } from "lucide-react"
 
 const team = [
   {
@@ -49,6 +49,17 @@ const team = [
     color: "from-orange-500 to-amber-500",
     borderColor: "#F97316",
   },
+  {
+    name: "Abdullah Shoaib",
+    role: "Solutions Architect",
+    emoji: "🏗️",
+    blurb: "I design robust, scalable technical solutions that align with business goals. From system architecture to technology strategy, I ensure our solutions built to last.",
+    image: "/mehdi.jpeg",
+    fallbackIcon: Architecture,
+    icon: Architecture,
+    color: "from-red-500 to-rose-500",
+    borderColor: "#EF4444",
+  },
 ]
 
 // Separate component for team member with image error handling
@@ -65,7 +76,7 @@ function TeamMemberCard({ member, idx }: { member: typeof team[0], idx: number }
       whileHover={{ y: -8, scale: 1.02 }}
       className="group"
     >
-      <div className="glass-card rounded-3xl p-6 h-full flex flex-col items-center text-center relative overflow-hidden border border-white/5 hover:border-white/10 transition-all duration-300">
+      <div className="glass-card rounded-3xl p-5 h-full flex flex-col items-center text-center relative overflow-hidden border border-white/5 hover:border-white/10 transition-all duration-300">
         {/* Hover gradient effect */}
         <div className={`absolute inset-0 bg-gradient-to-br ${member.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
 
@@ -79,16 +90,16 @@ function TeamMemberCard({ member, idx }: { member: typeof team[0], idx: number }
         </motion.div>
 
         {/* Image container */}
-        <div className="relative mb-5">
+        <div className="relative mb-4">
           <motion.div
-            className="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden border-4 shadow-xl relative flex items-center justify-center"
+            className="w-24 h-24 md:w-28 md:h-28 rounded-full overflow-hidden border-4 shadow-xl relative flex items-center justify-center"
             style={{ borderColor: member.borderColor }}
             whileHover={{ scale: 1.05, rotate: 2 }}
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
           >
             {imageError || !member.image ? (
               <div className={`w-full h-full bg-gradient-to-br ${member.color} flex items-center justify-center`}>
-                <FallbackIcon className="w-12 h-12 text-white/80" />
+                <FallbackIcon className="w-10 h-10 text-white/80" />
               </div>
             ) : (
               <img
@@ -101,7 +112,7 @@ function TeamMemberCard({ member, idx }: { member: typeof team[0], idx: number }
           </motion.div>
           {/* Emoji badge */}
           <motion.div
-            className="absolute -bottom-2 -right-2 w-10 h-10 rounded-full bg-[#1a1d2d] border-2 border-white/10 flex items-center justify-center text-xl shadow-lg"
+            className="absolute -bottom-1 -right-1 w-8 h-8 rounded-full bg-[#1a1d2d] border-2 border-white/10 flex items-center justify-center text-lg shadow-lg"
             whileHover={{ scale: 1.2, rotate: 10 }}
             transition={{ type: "spring", stiffness: 400 }}
           >
@@ -110,13 +121,13 @@ function TeamMemberCard({ member, idx }: { member: typeof team[0], idx: number }
         </div>
 
         {/* Member info */}
-        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-white group-hover:to-gray-300 transition-all duration-300">
+        <h3 className="text-lg font-bold text-white mb-1 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-white group-hover:to-gray-300 transition-all duration-300">
           {member.name}
         </h3>
-        <p className={`text-sm font-semibold mb-3 bg-gradient-to-r ${member.color} bg-clip-text text-transparent`}>
+        <p className={`text-xs font-semibold mb-2 bg-gradient-to-r ${member.color} bg-clip-text text-transparent`}>
           {member.role}
         </p>
-        <p className="text-gray-400 text-sm leading-relaxed flex-grow">
+        <p className="text-gray-400 text-xs leading-relaxed flex-grow line-clamp-3">
           {member.blurb}
         </p>
       </div>
@@ -174,12 +185,12 @@ export default function WhoWeAre() {
             transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
             className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
           >
-            We are a passionate team of innovators who founded PixelSolve to build next generation AI and software experiences. We combine our expertise to deliver exceptional results.
+            We are a passionate team of five innovators who founded PixelSolve to build next generation AI and software experiences. We combine our expertise to deliver exceptional results.
           </motion.p>
         </motion.div>
 
-        {/* Team Section - Grid Layout for 4 Members */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto mb-16">
+        {/* Team Section - Grid Layout for 5 Members */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6 max-w-7xl mx-auto mb-16">
           {team.map((member, idx) => (
             <TeamMemberCard key={member.name} member={member} idx={idx} />
           ))}
@@ -194,7 +205,7 @@ export default function WhoWeAre() {
           className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12"
         >
           {[
-            { number: "4+", label: "Team Members" },
+            { number: "5+", label: "Team Members" },
             { number: "10+", label: "Projects Delivered" },
             { number: "100%", label: "Client Satisfaction" },
             { number: "24/7", label: "Support Available" },
