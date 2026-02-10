@@ -1,7 +1,7 @@
 "use client"
 
 import { useState } from "react"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 
 interface NavigationProps {
   activeSection: string
@@ -14,6 +14,7 @@ export default function Navigation({ activeSection }: NavigationProps) {
     { id: "home", label: "Home" },
     { id: "services", label: "Services" },
     { id: "portfolio", label: "Portfolio" },
+    { id: "clients", label: "Clients" },
     { id: "about", label: "About" },
     { id: "contact", label: "Contact" },
   ]
@@ -46,14 +47,14 @@ export default function Navigation({ activeSection }: NavigationProps) {
                 className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 ${
                   activeSection === item.id ? "text-cool-blue" : "text-soft-gray hover:text-fog-white"
                 }`}
-                whileHover={{ 
+                whileHover={{
                   scale: 1.05,
                   y: -2,
                 }}
                 whileTap={{ scale: 0.95 }}
               >
                 {item.label}
-                
+
                 {activeSection === item.id && (
                   <motion.div
                     layoutId="activeSection"
@@ -62,7 +63,7 @@ export default function Navigation({ activeSection }: NavigationProps) {
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
-                
+
                 {/* Hover underline */}
                 <motion.div
                   className="absolute bottom-0 left-0 right-0 h-0.5 bg-cool-blue/50"
@@ -75,12 +76,12 @@ export default function Navigation({ activeSection }: NavigationProps) {
           </div>
 
           {/* Mobile menu button */}
-          <motion.div 
+          <motion.div
             className="md:hidden"
             whileHover={{ scale: 1.1 }}
             whileTap={{ scale: 0.9 }}
           >
-            <button 
+            <button
               className="text-fog-white hover:text-cool-blue transition-colors p-2"
               aria-label="Open menu"
               onClick={() => setMobileOpen((open) => !open)}
@@ -91,30 +92,40 @@ export default function Navigation({ activeSection }: NavigationProps) {
             </button>
           </motion.div>
         </div>
-        
-        {/* Mobile menu dropdown */}
-        {mobileOpen && (
-          <motion.div 
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.2 }}
-            className="md:hidden mt-4 bg-[#131521] rounded-lg shadow-lg p-4 flex flex-col space-y-4"
-          >
-            {navItems.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => {
-                  scrollToSection(item.id);
-                  setMobileOpen(false);
-                }}
-                className={`w-full text-left px-4 py-2 rounded text-lg font-medium transition-colors duration-200 ${activeSection === item.id ? "text-cool-blue" : "text-soft-gray hover:text-fog-white"}`}
-              >
-                {item.label}
-              </button>
-            ))}
-          </motion.div>
-        )}
+
+        {/* Mobile menu dropdown with AnimatePresence */}
+        <AnimatePresence>
+          {mobileOpen && (
+            <motion.div
+              initial={{ opacity: 0, y: -20, height: 0 }}
+              animate={{ opacity: 1, y: 0, height: "auto" }}
+              exit={{ opacity: 0, y: -20, height: 0 }}
+              transition={{ duration: 0.2 }}
+              className="md:hidden overflow-hidden"
+            >
+              <div className="pt-4 pb-2 bg-[#131521]/95 backdrop-blur-sm rounded-lg shadow-lg border border-white/5">
+                {navItems.map((item) => (
+                  <motion.button
+                    key={item.id}
+                    onClick={() => {
+                      scrollToSection(item.id);
+                      setMobileOpen(false);
+                    }}
+                    className={`w-full text-left px-4 py-3 rounded-lg text-lg font-medium transition-colors duration-200 ${
+                      activeSection === item.id
+                        ? "text-cool-blue bg-white/5"
+                        : "text-soft-gray hover:text-fog-white hover:bg-white/5"
+                    }`}
+                    whileHover={{ x: 4 }}
+                    whileTap={{ scale: 0.98 }}
+                  >
+                    {item.label}
+                  </motion.button>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
   )

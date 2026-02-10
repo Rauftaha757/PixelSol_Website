@@ -24,6 +24,11 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
+    /* Team member gradient colors */
+    --color-1: #3B82F6;
+    --color-2: #A855F7;
+    --color-3: #22C55E;
+    --color-4: #F97316;
   }
 
   .dark {

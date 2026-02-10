@@ -78,12 +78,12 @@ export default function Services() {
             Our Services
           </motion.h2>
           
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
-            className="text-xl text-soft-gray max-w-3xl mx-auto mb-6"
+            className="text-xl text-gray-300 max-w-3xl mx-auto mb-6"
           >
             We deliver cutting-edge digital solutions that transform ideas into reality
           </motion.p>
@@ -148,7 +148,7 @@ export default function Services() {
           className="text-center max-w-2xl mx-auto mt-8"
         >
           <p className="text-gray-400 text-sm italic">
-            "Transforming ideas into digital reality"
+            Transforming ideas into digital reality
           </p>
         </motion.div>
       </div>

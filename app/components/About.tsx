@@ -1,35 +1,145 @@
 "use client"
 
 import { motion } from "framer-motion"
-import Image from "next/image"
+import { useState } from "react"
+import { Code, Bot, Server, Briefcase, User } from "lucide-react"
 
-const founders = [
+const team = [
   {
     name: "Taha Rauf",
-    role: "Full Stack Dev / Product Architect",
+    role: "Full Stack Developer & Product Architect",
     emoji: "💻",
-    blurb: "I bring ideas to life with clean code and intuitive design — merging frontend elegance with backend strength.",
+    blurb: "I bring ideas to life with clean code and intuitive design. Merging frontend elegance with backend strength to create seamless digital experiences.",
     image: "/taha.jpeg",
+    fallbackIcon: Code,
+    icon: Code,
+    color: "from-blue-500 to-cyan-500",
+    borderColor: "#3B82F6",
   },
   {
     name: "Hammad Sikandar",
     role: "AI/ML Engineer",
     emoji: "🤖",
-    blurb: "I build intelligent systems that learn, adapt, and solve real-world problems.",
+    blurb: "I build intelligent systems that learn, adapt, and solve real-world problems using cutting-edge artificial intelligence and machine learning technologies.",
     image: "/hammad.jpeg",
+    fallbackIcon: Bot,
+    icon: Bot,
+    color: "from-purple-500 to-pink-500",
+    borderColor: "#A855F7",
   },
   {
     name: "Babar Shaheen",
     role: "DevOps & Backend Engineer",
     emoji: "🛠️",
-    blurb: "I ensure everything runs like clockwork — from APIs to servers to cloud infra.",
+    blurb: "I ensure everything runs smoothly and securely. From APIs to servers to cloud infrastructure, I keep our systems reliable and scalable.",
     image: "/babar.jpg",
+    fallbackIcon: Server,
+    icon: Server,
+    color: "from-green-500 to-emerald-500",
+    borderColor: "#22C55E",
+  },
+  {
+    name: "Syed Saad Kamal",
+    role: "Business Developer",
+    emoji: "🚀",
+    blurb: "I bridge the gap between technology and business. Turning innovative ideas into successful ventures and building strategic partnerships that drive growth.",
+    image: "/saad.jpeg",
+    fallbackIcon: Briefcase,
+    icon: Briefcase,
+    color: "from-orange-500 to-amber-500",
+    borderColor: "#F97316",
   },
 ]
 
+// Separate component for team member with image error handling
+function TeamMemberCard({ member, idx }: { member: typeof team[0], idx: number }) {
+  const [imageError, setImageError] = useState(false)
+  const FallbackIcon = member.fallbackIcon || User
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 40, scale: 0.95 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6, delay: idx * 0.12, ease: "easeOut" }}
+      whileHover={{ y: -8, scale: 1.02 }}
+      className="group"
+    >
+      <div className="glass-card rounded-3xl p-6 h-full flex flex-col items-center text-center relative overflow-hidden border border-white/5 hover:border-white/10 transition-all duration-300">
+        {/* Hover gradient effect */}
+        <div className={`absolute inset-0 bg-gradient-to-br ${member.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+
+        {/* Icon badge */}
+        <motion.div
+          className={`absolute top-4 right-4 w-10 h-10 rounded-full bg-gradient-to-br ${member.color} flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300`}
+          whileHover={{ rotate: 360 }}
+          transition={{ duration: 0.6 }}
+        >
+          <member.icon className="w-5 h-5 text-white" />
+        </motion.div>
+
+        {/* Image container */}
+        <div className="relative mb-5">
+          <motion.div
+            className="w-28 h-28 md:w-32 md:h-32 rounded-full overflow-hidden border-4 shadow-xl relative flex items-center justify-center"
+            style={{ borderColor: member.borderColor }}
+            whileHover={{ scale: 1.05, rotate: 2 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+          >
+            {imageError || !member.image ? (
+              <div className={`w-full h-full bg-gradient-to-br ${member.color} flex items-center justify-center`}>
+                <FallbackIcon className="w-12 h-12 text-white/80" />
+              </div>
+            ) : (
+              <img
+                src={member.image}
+                alt={member.name}
+                className="object-cover w-full h-full"
+                onError={() => setImageError(true)}
+              />
+            )}
+          </motion.div>
+          {/* Emoji badge */}
+          <motion.div
+            className="absolute -bottom-2 -right-2 w-10 h-10 rounded-full bg-[#1a1d2d] border-2 border-white/10 flex items-center justify-center text-xl shadow-lg"
+            whileHover={{ scale: 1.2, rotate: 10 }}
+            transition={{ type: "spring", stiffness: 400 }}
+          >
+            {member.emoji}
+          </motion.div>
+        </div>
+
+        {/* Member info */}
+        <h3 className="text-xl font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-white group-hover:to-gray-300 transition-all duration-300">
+          {member.name}
+        </h3>
+        <p className={`text-sm font-semibold mb-3 bg-gradient-to-r ${member.color} bg-clip-text text-transparent`}>
+          {member.role}
+        </p>
+        <p className="text-gray-400 text-sm leading-relaxed flex-grow">
+          {member.blurb}
+        </p>
+      </div>
+    </motion.div>
+  )
+}
+
 export default function WhoWeAre() {
   return (
-    <section id="about" className="py-20 bg-[#0b0f19] relative overflow-hidden">
+    <section id="about" className="py-24 bg-gradient-to-b from-[#0b0f19] to-[#0f111a] relative overflow-hidden">
+      {/* Background Animation */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true, amount: 0.3 }}
+        transition={{ duration: 1.5 }}
+        className="absolute inset-0 pointer-events-none"
+      >
+        <div className="absolute top-20 right-10 w-64 h-64 bg-green-500/5 rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-20 left-10 w-96 h-96 bg-blue-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1.5s' }}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-purple-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '0.8s' }}></div>
+      </motion.div>
+
       <div className="container mx-auto px-6 relative z-10">
         {/* Title Section */}
         <motion.div
@@ -37,79 +147,87 @@ export default function WhoWeAre() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <motion.span 
+          <motion.span
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="block text-sm font-semibold uppercase tracking-widest text-green-400 mb-4"
+            className="inline-block px-4 py-2 rounded-full bg-green-500/10 border border-green-500/30 text-sm font-semibold uppercase tracking-widest text-green-400 mb-6"
           >
             WHO WE ARE
           </motion.span>
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-            className="text-4xl md:text-5xl font-bold mb-6 text-white"
+            className="text-4xl md:text-6xl font-bold mb-6 text-white"
           >
             Friends. Founders. Builders.
           </motion.h2>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-            className="text-lg text-gray-300 max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed"
           >
-            We're three close friends who founded a startup to build next-gen AI and software experiences. We code, learn, and grow together — and we love what we do.
+            We are a passionate team of innovators who founded PixelSolve to build next generation AI and software experiences. We combine our expertise to deliver exceptional results.
           </motion.p>
         </motion.div>
-        
-        {/* Founders Section */}
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.2 }}
-          variants={{
-            hidden: {},
-            visible: { transition: { staggerChildren: 0.18 } },
-          }}
-          className="flex flex-col sm:flex-row justify-center items-center gap-10 md:gap-16 mb-16"
-        >
-          {founders.map((founder, idx) => (
-            <motion.div
-              key={founder.name}
-              variants={{
-                hidden: { opacity: 0, y: 40, scale: 0.9 },
-                visible: { opacity: 1, y: 0, scale: 1 },
-              }}
-              whileHover={{ scale: 1.05, boxShadow: "0 8px 32px 0 rgba(59,130,246,0.18)" }}
-              transition={{ type: "spring", stiffness: 220, damping: 18 }}
-              className="group flex flex-col items-center text-center"
-            >
-              <div className="w-24 h-24 md:w-32 md:h-32 mb-4 rounded-full overflow-hidden border-4 border-[#3B82F6] shadow-lg object-cover transition duration-300 hover:scale-105 hover:shadow-xl">
-                <Image src={founder.image} alt={founder.name} width={128} height={128} className="object-cover w-full h-full rounded-full transition duration-300 group-hover:scale-105 group-hover:shadow-xl" />
-              </div>
-              <h3 className="text-xl font-bold text-white mb-1">{founder.name}</h3>
-              <p className="text-green-400 font-medium mb-2">{founder.role}</p>
-              <p className="text-gray-300 text-base mb-2">{founder.blurb}</p>
-            </motion.div>
+
+        {/* Team Section - Grid Layout for 4 Members */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto mb-16">
+          {team.map((member, idx) => (
+            <TeamMemberCard key={member.name} member={member} idx={idx} />
           ))}
-        </motion.div>
-        
-        {/* Quote Section */}
+        </div>
+
+        {/* Stats Section */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-center max-w-2xl mx-auto mt-8"
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12"
         >
-          <blockquote className="italic text-lg text-gray-400 border-l-4 border-green-400 pl-6">
-            "We're not just building software — we're building a future, together."
+          {[
+            { number: "4+", label: "Team Members" },
+            { number: "10+", label: "Projects Delivered" },
+            { number: "100%", label: "Client Satisfaction" },
+            { number: "24/7", label: "Support Available" },
+          ].map((stat, idx) => (
+            <motion.div
+              key={stat.label}
+              whileHover={{ y: -4 }}
+              className="glass-card rounded-2xl p-6 text-center"
+            >
+              <div className="text-3xl md:text-4xl font-bold bg-gradient-to-r from-cool-blue to-accent-blue bg-clip-text text-transparent mb-2">
+                {stat.number}
+              </div>
+              <div className="text-sm text-gray-400">{stat.label}</div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Quote Section */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="text-center max-w-3xl mx-auto"
+        >
+          <blockquote className="relative">
+            <svg className="w-12 h-12 text-green-500/20 mx-auto mb-4" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+            </svg>
+            <p className="text-xl md:text-2xl text-gray-300 italic leading-relaxed mb-4">
+              We are not just building software. We are building a future together.
+            </p>
+            <div className="h-0.5 w-24 bg-gradient-to-r from-transparent via-green-500 to-transparent mx-auto"></div>
           </blockquote>
         </motion.div>
       </div>

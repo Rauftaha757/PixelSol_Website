@@ -159,7 +159,7 @@ export default function Hero() {
           transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
           className="text-xl md:text-2xl text-soft-gray mb-12 max-w-3xl mx-auto"
         >
-          From AI to Apps — We Build What Matters
+          From AI to Apps, We Build What Matters
         </motion.p>
 
         {/* Enhanced CTA Button */}
@@ -179,7 +179,7 @@ export default function Hero() {
             }}
             whileTap={{ scale: 0.95 }}
           >
-            <span>Let's Build Together</span>
+            <span>Build With Us</span>
             <motion.div
               className="group-hover:translate-x-1 transition-transform"
               animate={{ x: [0, 5, 0] }}
@@ -202,7 +202,7 @@ export default function Hero() {
             transition={{ type: "spring", stiffness: 300, damping: 20 }}
             className="text-gray-400 text-sm italic"
           >
-            "Where innovation meets execution"
+            Where innovation meets execution
           </motion.p>
         </motion.div>
       </div>

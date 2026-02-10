@@ -1,44 +1,56 @@
 "use client"
 
 import { motion } from "framer-motion"
-import { FaBrain, FaChartBar, FaCogs, FaFlask, FaRocket, FaSyncAlt } from "react-icons/fa"
+import { Brain, BarChart3, Cog, FlaskConical, Rocket, RefreshCw } from "lucide-react"
 
 const steps = [
   {
-    icon: FaBrain,
+    icon: Brain,
     title: "Research",
+    description: "Understanding requirements and exploring solutions",
     color: "from-green-500 to-emerald-500",
+    number: "01",
   },
   {
-    icon: FaChartBar,
+    icon: BarChart3,
     title: "Data Collection",
+    description: "Gathering and preparing quality datasets",
     color: "from-blue-500 to-cyan-500",
+    number: "02",
   },
   {
-    icon: FaCogs,
+    icon: Cog,
     title: "Model Training",
+    description: "Building and optimizing intelligent systems",
     color: "from-purple-500 to-pink-500",
+    number: "03",
   },
   {
-    icon: FaFlask,
+    icon: FlaskConical,
     title: "Evaluation",
+    description: "Testing and validating performance metrics",
     color: "from-orange-500 to-red-500",
+    number: "04",
   },
   {
-    icon: FaRocket,
+    icon: Rocket,
     title: "Deployment",
+    description: "Launching scalable production solutions",
     color: "from-indigo-500 to-purple-500",
+    number: "05",
   },
   {
-    icon: FaSyncAlt,
+    icon: RefreshCw,
     title: "Continuous Improvement",
+    description: "Monitoring and enhancing over time",
     color: "from-yellow-500 to-orange-500",
+    number: "06",
   },
 ]
 
 export default function OurApproach() {
   return (
-    <section className="py-20 bg-[#0b0f19] relative overflow-hidden">
+    <section className="py-24 bg-gradient-to-b from-[#0b0f19] to-deep-slate relative overflow-hidden">
       {/* Background Animation */}
       <motion.div
         initial={{ opacity: 0 }}
@@ -60,66 +72,76 @@ export default function OurApproach() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
           transition={{ duration: 1, ease: "easeOut" }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <motion.span 
+          <motion.span
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="block text-sm font-semibold uppercase tracking-widest text-green-400 mb-4"
+            className="inline-block px-4 py-2 rounded-full bg-green-500/10 border border-green-500/30 text-sm font-semibold uppercase tracking-widest text-green-400 mb-6"
           >
-            OUR AI DEVELOPMENT PROCESS
+            Our Process
           </motion.span>
-          
-          <motion.h2 
+
+          <motion.h2
             initial={{ opacity: 0, scale: 0.9 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
-            className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
+            className="text-4xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent"
           >
-            Our Approach to Building Intelligent Systems
+            How We Build Intelligent Systems
           </motion.h2>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8, delay: 0.5, ease: "easeOut" }}
-            className="text-lg text-gray-300 max-w-2xl mx-auto"
+            className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto"
           >
-            From data collection to deployment, we follow a refined process to ensure accuracy, scalability, and real-world value.
+            From concept to deployment, we follow a refined process to ensure accuracy, scalability, and real-world value.
           </motion.p>
         </motion.div>
 
-        {/* Steps Grid - Fixed alignment */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        {/* Steps Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
           {steps.map((step, idx) => (
             <motion.div
               key={step.title}
-              whileHover={{ 
-                scale: 1.02, 
-                y: -4, 
-                boxShadow: "0 20px 40px rgba(34,197,94,0.15)",
-                transition: { type: "spring", stiffness: 300, damping: 20 }
-              }}
-              whileTap={{ scale: 0.98 }}
-              className="group flex flex-col items-center text-center bg-[#101624] rounded-2xl p-8 shadow-lg hover:shadow-green-400/20 transition-all duration-300 cursor-pointer relative overflow-hidden backdrop-blur-sm border border-white/10 hover:border-green-500/30 h-full"
+              initial={{ opacity: 0, y: 40 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.6, delay: idx * 0.1, ease: "easeOut" }}
+              whileHover={{ y: -6 }}
+              className="group"
             >
-              {/* Hover background effect */}
-              <div className="absolute inset-0 bg-gradient-to-br from-green-500/5 to-emerald-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-              <div className="relative z-10 flex flex-col items-center justify-center h-full">
-                <div
-                  className={`w-16 h-16 mb-6 flex items-center justify-center rounded-full bg-gradient-to-br ${step.color} group-hover:scale-110 transition-transform duration-300 shadow-lg flex-shrink-0`}
-                >
-                  <step.icon className="w-8 h-8 text-white drop-shadow-lg" />
+              <div className="glass-card rounded-2xl p-6 h-full flex flex-col items-center text-center relative overflow-hidden border border-white/5 hover:border-white/10 transition-all duration-300">
+                {/* Number badge */}
+                <div className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/5 flex items-center justify-center text-xs text-gray-500 font-mono">
+                  {step.number}
                 </div>
-                
-                <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-green-400 transition-colors leading-tight">
+
+                {/* Hover background effect */}
+                <div className={`absolute inset-0 bg-gradient-to-br ${step.color} opacity-0 group-hover:opacity-10 transition-opacity duration-500`}></div>
+
+                {/* Icon */}
+                <div
+                  className={`w-16 h-16 mb-4 flex items-center justify-center rounded-2xl bg-gradient-to-br ${step.color} group-hover:scale-110 group-hover:rotate-6 transition-all duration-300 shadow-lg flex-shrink-0`}
+                >
+                  <step.icon className="w-8 h-8 text-white" />
+                </div>
+
+                {/* Title */}
+                <h3 className="text-lg font-bold text-white mb-2 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-white group-hover:to-gray-300 transition-all duration-300">
                   {step.title}
                 </h3>
+
+                {/* Description */}
+                <p className="text-sm text-gray-400 leading-relaxed">
+                  {step.description}
+                </p>
               </div>
             </motion.div>
           ))}
@@ -130,14 +152,14 @@ export default function OurApproach() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
-          className="text-center max-w-2xl mx-auto mt-8"
+          transition={{ duration: 0.7, delay: 0.3 }}
+          className="text-center max-w-2xl mx-auto mt-12"
         >
           <p className="text-gray-400 text-sm italic">
-            "Systematic approach to intelligent solutions"
+            Systematic approach to intelligent solutions
           </p>
         </motion.div>
       </div>
     </section>
   )
-} 
+}

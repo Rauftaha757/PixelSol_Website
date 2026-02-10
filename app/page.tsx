@@ -6,6 +6,7 @@ import Navigation from "./components/Navigation"
 import Hero from "./components/Hero"
 import Services from "./components/Services"
 import Portfolio from "./components/Portfolio"
+import ClientWork from "./components/ClientWork"
 import OurApproach from "./components/OurApproach"
 import About from "./components/About"
 import Contact from "./components/Contact"
@@ -25,7 +26,7 @@ export default function Home() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["home", "services", "portfolio", "about", "contact"]
+      const sections = ["home", "services", "portfolio", "clients", "about", "contact"]
       const scrollPosition = window.scrollY + 100
 
       for (const section of sections) {
@@ -40,7 +41,7 @@ export default function Home() {
       }
     }
 
-    window.addEventListener("scroll", handleScroll)
+    window.addEventListener("scroll", handleScroll, { passive: true })
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
@@ -107,6 +108,7 @@ export default function Home() {
             <Services />
             <OurApproach />
             <Portfolio />
+            <ClientWork />
             <About />
             <Contact />
           </motion.main>
