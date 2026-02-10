@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useState } from "react"
-import { Code, Bot, Server, Briefcase, User, Architecture } from "lucide-react"
+import { Code, Bot, Server, Briefcase, User, Building2 } from "lucide-react"
 
 const team = [
   {
@@ -55,8 +55,8 @@ const team = [
     emoji: "🏗️",
     blurb: "I design robust, scalable technical solutions that align with business goals. From system architecture to technology strategy, I ensure our solutions built to last.",
     image: "/mehdi.jpeg",
-    fallbackIcon: Architecture,
-    icon: Architecture,
+    fallbackIcon: Building2,
+    icon: Building2,
     color: "from-red-500 to-rose-500",
     borderColor: "#EF4444",
   },
