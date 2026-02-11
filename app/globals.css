@@ -279,6 +279,21 @@
   animation: shimmer 2s infinite;
 }
 
+/* Hero gradient animation */
+@keyframes gradient-xy {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient-xy {
+  background-size: 200% 200%;
+  animation: gradient-xy 3s ease infinite;
+}
+
 /* Focus styles for accessibility */
 *:focus {
   outline: 2px solid #777f99;

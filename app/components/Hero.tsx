@@ -6,10 +6,16 @@ import { ArrowRight, Sparkles } from "lucide-react"
 export default function Hero() {
   const { scrollY } = useScroll()
   const y = useTransform(scrollY, [0, 300], [0, 100])
-  const opacity = useTransform(scrollY, [0, 300], [1, 0])
 
   const scrollToContact = () => {
     const element = document.getElementById("contact")
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth" })
+    }
+  }
+
+  const scrollToPortfolio = () => {
+    const element = document.getElementById("portfolio")
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
     }
@@ -167,6 +173,7 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1, ease: "easeOut" }}
+          className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <motion.button
             onClick={scrollToContact}
@@ -188,22 +195,15 @@ export default function Hero() {
               <ArrowRight className="w-5 h-5" />
             </motion.div>
           </motion.button>
-        </motion.div>
 
-        {/* Additional Hero Info */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 1.3, ease: "easeOut" }}
-          className="mt-16"
-        >
-          <motion.p
-            whileHover={{ scale: 1.02 }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="text-gray-400 text-sm italic"
+          <motion.button
+            onClick={scrollToPortfolio}
+            whileHover={{ scale: 1.05, y: -3 }}
+            whileTap={{ scale: 0.95 }}
+            className="inline-flex items-center gap-3 px-6 py-4 rounded-full bg-white/5 border border-white/10 text-fog-white font-medium hover:bg-white/10 transition-all duration-300"
           >
-            Where innovation meets execution
-          </motion.p>
+            View Our Work
+          </motion.button>
         </motion.div>
       </div>
     </section>

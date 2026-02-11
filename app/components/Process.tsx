@@ -2,56 +2,62 @@
 
 import { motion, AnimatePresence } from "framer-motion"
 import { useState } from "react"
-import { ChevronDown, ArrowRight, Check } from "lucide-react"
+import { ChevronDown, ArrowRight, Check, Sparkles, Cpu, Database } from "lucide-react"
 
 const steps = [
   {
     number: "01",
-    title: "Research",
-    description: "Understanding requirements and exploring solutions",
-    detail: "Deep dive into your business needs, target audience, and technical requirements. We analyze competitors and identify opportunities for innovation.",
+    title: "Discovery & Strategy",
+    description: "Understanding your AI opportunities and automation potential",
+    detail: "Deep dive into your business processes to identify high-impact AI opportunities. We analyze workflows, data assets, and automation potential to create a roadmap that delivers real ROI.",
     gradient: "from-cyan-500 to-blue-500",
     accent: "#06b6d4",
+    icon: Sparkles,
   },
   {
     number: "02",
-    title: "Data Collection",
-    description: "Gathering and preparing quality datasets",
-    detail: "Collecting, cleaning, and structuring data. We ensure data quality and prepare pipelines for training robust models.",
+    title: "Data Engineering",
+    description: "Building robust data pipelines and vector stores",
+    detail: "Setting up data infrastructure including vector databases (Pinecone, Weaviate), ETL pipelines, and knowledge bases that power your AI systems with clean, structured data.",
     gradient: "from-blue-500 to-indigo-500",
     accent: "#3b82f6",
+    icon: Database,
   },
   {
     number: "03",
-    title: "Model Training",
-    description: "Building and optimizing intelligent systems",
-    detail: "Training models with state-of-the-art techniques. Fine-tuning hyperparameters for optimal performance and accuracy.",
+    title: "AI Agent Development",
+    description: "Creating autonomous agents with reasoning capabilities",
+    detail: "Building intelligent agents using LangChain, AutoGPT, and CrewAI that can autonomously plan, execute, and complete complex multi-step tasks with human-in-the-loop oversight.",
     gradient: "from-violet-500 to-purple-500",
     accent: "#8b5cf6",
+    icon: Cpu,
   },
   {
     number: "04",
-    title: "Evaluation",
-    description: "Testing and validating performance metrics",
-    detail: "Rigorous testing against real-world scenarios. We measure accuracy, efficiency, and user experience.",
+    title: "RAG & Fine-Tuning",
+    description: "Training models on your proprietary data",
+    detail: "Implementing Retrieval Augmented Generation (RAG) and fine-tuning LLMs on your domain knowledge. We ensure your AI understands your business, customers, and context accurately.",
     gradient: "from-purple-500 to-fuchsia-500",
     accent: "#a855f7",
+    icon: Sparkles,
   },
   {
     number: "05",
-    title: "Deployment",
-    description: "Launching scalable production solutions",
-    detail: "Seamless deployment to cloud infrastructure. We ensure scalability, security, and monitoring are in place.",
+    title: "Production Deployment",
+    description: "Scaling AI with LLMOps and monitoring",
+    detail: "Deploying with enterprise-grade infrastructure including rate limiting, caching, fallback models, and comprehensive monitoring. We ensure 99.9% uptime and sub-second response times.",
     gradient: "from-fuchsia-500 to-pink-500",
     accent: "#d946ef",
+    icon: Cpu,
   },
   {
     number: "06",
-    title: "Continuous Improvement",
-    description: "Monitoring and enhancing over time",
-    detail: "Ongoing monitoring and optimization. We iterate based on feedback and evolving business needs.",
+    title: "Continuous Optimization",
+    description: "Improving AI performance based on real usage",
+    detail: "Monitoring user interactions, collecting feedback, and continuously improving model performance. We implement A/B testing, prompt optimization, and model retraining pipelines.",
     gradient: "from-pink-500 to-rose-500",
     accent: "#ec4899",
+    icon: Check,
   },
 ]
 
@@ -66,6 +72,8 @@ function ProcessStep({
   isActive: boolean
   onToggle: () => void
 }) {
+  const Icon = step.icon
+
   return (
     <motion.div
       initial={{ opacity: 0, x: -50 }}
@@ -131,11 +139,16 @@ function ProcessStep({
           <div className="p-6">
             <div className="flex items-start justify-between gap-4">
               <div className="flex-1">
-                <h3 className={`text-xl font-bold mb-2 transition-colors ${
-                  isActive ? 'text-white' : 'text-gray-400'
-                }`}>
-                  {step.title}
-                </h3>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${isActive ? 'bg-gradient-to-br from-white/10 to-white/5' : 'bg-white/5'}`}>
+                    <Icon className={`w-5 h-5 ${isActive ? 'text-white' : 'text-white/30'}`} />
+                  </div>
+                  <h3 className={`text-xl font-bold transition-colors ${
+                    isActive ? 'text-white' : 'text-gray-400'
+                  }`}>
+                    {step.title}
+                  </h3>
+                </div>
                 <p className={`text-sm transition-colors ${
                   isActive ? 'text-gray-400' : 'text-gray-600'
                 }`}>
@@ -180,26 +193,25 @@ function ProcessStep({
                     {step.detail}
                   </p>
 
-                  {/* Features list */}
-                  <div className="space-y-3">
-                    {[
-                      "Expert consultation and planning",
-                      "Agile development methodology",
-                      "Transparent communication",
-                      "Quality assurance guaranteed"
-                    ].map((feature, idx) => (
-                      <motion.div
-                        key={idx}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: idx * 0.1 }}
-                        className="flex items-center gap-3 text-sm text-gray-500"
-                      >
-                        <div className={`w-5 h-5 rounded-full flex items-center justify-center bg-gradient-to-br ${step.gradient}`}>
-                          <Check className="w-3 h-3 text-white" />
-                        </div>
-                        <span>{feature}</span>
-                      </motion.div>
+                  {/* Tech tags */}
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {index === 0 && ["Strategy", "AI Assessment", "ROI Analysis"].map(tag => (
+                      <span key={tag} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400">{tag}</span>
+                    ))}
+                    {index === 1 && ["Vector DB", "ETL Pipelines", "Data Lakes"].map(tag => (
+                      <span key={tag} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400">{tag}</span>
+                    ))}
+                    {index === 2 && ["LangChain", "CrewAI", "Multi-Agent"].map(tag => (
+                      <span key={tag} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400">{tag}</span>
+                    ))}
+                    {index === 3 && ["RAG", "Fine-tuning", "LlamaIndex"].map(tag => (
+                      <span key={tag} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400">{tag}</span>
+                    ))}
+                    {index === 4 && ["LLMOps", "Monitoring", "Scaling"].map(tag => (
+                      <span key={tag} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400">{tag}</span>
+                    ))}
+                    {index === 5 && ["A/B Testing", "Analytics", "Improvement"].map(tag => (
+                      <span key={tag} className="px-3 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-gray-400">{tag}</span>
                     ))}
                   </div>
 
@@ -208,7 +220,7 @@ function ProcessStep({
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="mt-6 inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105"
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105"
                     style={{ background: `${step.accent}20`, color: step.accent }}
                   >
                     <span>Learn more</span>
@@ -253,11 +265,11 @@ export default function Process() {
             </span>
             <br />
             <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
-              Intelligent Systems
+              Agentic AI Systems
             </span>
           </h2>
           <p className="text-lg text-gray-400 max-w-2xl mx-auto">
-            From concept to deployment, we follow a refined process to ensure accuracy, scalability, and real-world value.
+            From discovery to deployment, we follow a proven methodology to build production-grade AI systems that deliver real business value.
           </p>
         </motion.div>
 
@@ -284,7 +296,7 @@ export default function Process() {
         >
           <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/5 border border-white/10">
             <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse"></div>
-            <span className="text-sm text-gray-400">Systematic approach to intelligent solutions</span>
+            <span className="text-sm text-gray-400">Building intelligent systems that work</span>
           </div>
         </motion.div>
       </div>

@@ -2,12 +2,12 @@
 
 import { motion } from "framer-motion"
 import { useState } from "react"
-import { Code, Bot, Server, Briefcase, User, Building2, Zap } from "lucide-react"
+import { Code, Bot, Server, Briefcase, User, Building2, Zap, Settings } from "lucide-react"
 
 const team = [
   {
     name: "Taha Rauf",
-    role: "Full Stack Developer & Product Architect",
+    role: "Mobile App Developer",
     blurb: "I bring ideas to life with clean code and intuitive design. Merging frontend elegance with backend strength to create seamless digital experiences.",
     image: "/taha.jpeg",
     fallbackIcon: Code,
@@ -27,13 +27,23 @@ const team = [
   },
   {
     name: "Babar Shaheen",
-    role: "DevOps & Backend Engineer",
+    role: "Full Stack Developer",
     blurb: "I ensure everything runs smoothly and securely. From APIs to servers to cloud infrastructure, I keep our systems reliable and scalable.",
     image: "/babar.jpg",
     fallbackIcon: Server,
     icon: Server,
     color: "from-green-500 to-emerald-500",
     borderColor: "#22C55E",
+  },
+  {
+    name: "Masroor",
+    role: "AI Automation Engineer",
+    blurb: "I design and build intelligent automation systems using AI agents, workflows, and LLMs to streamline business processes and boost productivity.",
+    image: "/masroor.jpeg",
+    fallbackIcon: Settings,
+    icon: Settings,
+    color: "from-teal-500 to-emerald-500",
+    borderColor: "#14B8A6",
   },
   {
     name: "Syed Saad Kamal",
@@ -186,7 +196,7 @@ export default function WhoWeAre() {
           </motion.p>
         </motion.div>
 
-        {/* Team Section - Grid Layout for 6 Members */}
+        {/* Team Section - Grid Layout for 7 Members */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto mb-16">
           {team.map((member, idx) => (
             <TeamMemberCard key={member.name} member={member} idx={idx} />
@@ -202,7 +212,7 @@ export default function WhoWeAre() {
           className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto mb-12"
         >
           {[
-            { number: "6+", label: "Team Members" },
+            { number: "7+", label: "Team Members" },
             { number: "10+", label: "Projects Delivered" },
             { number: "100%", label: "Client Satisfaction" },
             { number: "24/7", label: "Support Available" },
