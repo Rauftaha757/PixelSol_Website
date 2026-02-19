@@ -8,6 +8,7 @@ import Services from "./components/Services"
 import Process from "./components/Process"
 import Portfolio from "./components/Portfolio"
 import About from "./components/About"
+import ClientWork from "./components/ClientWork"
 import Contact from "./components/Contact"
 
 export default function Home() {
@@ -53,7 +54,7 @@ export default function Home() {
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-[#0f111a]"
+            className="fixed inset-0 z-50 flex items-center justify-center bg-[#0a0c10]"
           >
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
@@ -108,6 +109,7 @@ export default function Home() {
             <Process />
             <Portfolio />
             <About />
+            <ClientWork />
             <Contact />
           </motion.main>
         )}

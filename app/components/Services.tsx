@@ -242,8 +242,16 @@ export default function Services() {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.3 }}
                       >
-                        <button className="group inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all duration-300">
-                          <span className="font-medium">Explore This Service</span>
+                        <button
+                          onClick={() => {
+                            const element = document.getElementById("contact")
+                            if (element) {
+                              element.scrollIntoView({ behavior: "smooth" })
+                            }
+                          }}
+                          className="group inline-flex items-center gap-3 px-6 py-3 rounded-xl bg-white/5 border border-white/10 text-white hover:bg-white/10 transition-all duration-300 cursor-pointer"
+                        >
+                          <span className="font-medium">Get Started</span>
                           <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
                         </button>
                       </motion.div>

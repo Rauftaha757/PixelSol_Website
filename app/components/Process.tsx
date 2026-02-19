@@ -220,10 +220,17 @@ function ProcessStep({
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3 }}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105"
+                    onClick={(e) => {
+                      e.stopPropagation()
+                      const element = document.getElementById("contact")
+                      if (element) {
+                        element.scrollIntoView({ behavior: "smooth" })
+                      }
+                    }}
+                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 hover:scale-105 cursor-pointer"
                     style={{ background: `${step.accent}20`, color: step.accent }}
                   >
-                    <span>Learn more</span>
+                    <span>Get Started</span>
                     <ArrowRight className="w-4 h-4" />
                   </motion.button>
                 </div>

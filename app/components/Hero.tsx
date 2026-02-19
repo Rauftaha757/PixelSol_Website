@@ -6,16 +6,10 @@ import { ArrowRight, Sparkles } from "lucide-react"
 export default function Hero() {
   const { scrollY } = useScroll()
   const y = useTransform(scrollY, [0, 300], [0, 100])
+  const opacity = useTransform(scrollY, [0, 300], [1, 0])
 
   const scrollToContact = () => {
     const element = document.getElementById("contact")
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
-  }
-
-  const scrollToPortfolio = () => {
-    const element = document.getElementById("portfolio")
     if (element) {
       element.scrollIntoView({ behavior: "smooth" })
     }
@@ -43,7 +37,7 @@ export default function Hero() {
           }}
         />
 
-        {/* Floating background elements */}
+        {/* Additional floating background elements */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -56,9 +50,9 @@ export default function Hero() {
         </motion.div>
       </motion.div>
 
-      {/* Floating particles */}
+      {/* Enhanced Floating particles */}
       <div className="absolute inset-0">
-        {[...Array(20)].map((_, i) => (
+        {[...Array(40)].map((_, i) => (
           <motion.div
             key={i}
             className="absolute w-1 h-1 bg-cool-blue rounded-full opacity-30"
@@ -82,7 +76,7 @@ export default function Hero() {
         ))}
       </div>
 
-      {/* Floating geometric shapes */}
+      {/* Enhanced Floating geometric shapes */}
       <motion.div
         className="absolute bottom-20 left-20 w-32 h-32 border border-cool-blue/20 rounded-full"
         animate={{
@@ -163,9 +157,9 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.8, ease: "easeOut" }}
-          className="text-xl md:text-2xl text-soft-gray mb-12 max-w-3xl mx-auto"
+          className="text-xl md:text-2xl text-soft-gray mb-12 max-w-3xl mx-auto leading-relaxed"
         >
-          From AI to Apps, We Build What Matters
+          From AI to Apps — We Build What Matters
         </motion.p>
 
         {/* Enhanced CTA Button */}
@@ -173,7 +167,6 @@ export default function Hero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1, ease: "easeOut" }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <motion.button
             onClick={scrollToContact}
@@ -185,8 +178,9 @@ export default function Hero() {
               transition: { type: "spring", stiffness: 300, damping: 20 }
             }}
             whileTap={{ scale: 0.95 }}
+            data-cursor-text="Let's Talk"
           >
-            <span>Build With Us</span>
+            <span>Let's Build Together</span>
             <motion.div
               className="group-hover:translate-x-1 transition-transform"
               animate={{ x: [0, 5, 0] }}
@@ -195,15 +189,22 @@ export default function Hero() {
               <ArrowRight className="w-5 h-5" />
             </motion.div>
           </motion.button>
+        </motion.div>
 
-          <motion.button
-            onClick={scrollToPortfolio}
-            whileHover={{ scale: 1.05, y: -3 }}
-            whileTap={{ scale: 0.95 }}
-            className="inline-flex items-center gap-3 px-6 py-4 rounded-full bg-white/5 border border-white/10 text-fog-white font-medium hover:bg-white/10 transition-all duration-300"
+        {/* Additional Hero Info */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1.3, ease: "easeOut" }}
+          className="mt-16"
+        >
+          <motion.p
+            whileHover={{ scale: 1.02 }}
+            transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            className="text-gray-400 text-sm italic"
           >
-            View Our Work
-          </motion.button>
+            "Where innovation meets execution"
+          </motion.p>
         </motion.div>
       </div>
     </section>

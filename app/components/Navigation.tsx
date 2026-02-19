@@ -16,6 +16,7 @@ export default function Navigation({ activeSection }: NavigationProps) {
     { id: "process", label: "Process" },
     { id: "portfolio", label: "Portfolio" },
     { id: "about", label: "About" },
+    { id: "clients", label: "Clients" },
     { id: "contact", label: "Contact" },
   ]
 
@@ -27,13 +28,13 @@ export default function Navigation({ activeSection }: NavigationProps) {
   }
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0f111a]/80 backdrop-blur-md border-b border-[#373c4e]/20">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0f111a]/80 backdrop-blur-sm border-b border-[#373c4e]/20">
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
           <motion.div
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="text-2xl font-bold gradient-text cursor-pointer"
+            className="text-2xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent cursor-pointer"
             onClick={() => scrollToSection("home")}
           >
             PixelSolve
@@ -45,7 +46,7 @@ export default function Navigation({ activeSection }: NavigationProps) {
                 key={item.id}
                 onClick={() => scrollToSection(item.id)}
                 className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 ${
-                  activeSection === item.id ? "text-cool-blue" : "text-soft-gray hover:text-fog-white"
+                  activeSection === item.id ? "text-cool-blue" : "text-soft-gray hover:text-white"
                 }`}
                 whileHover={{
                   scale: 1.05,
@@ -54,7 +55,6 @@ export default function Navigation({ activeSection }: NavigationProps) {
                 whileTap={{ scale: 0.95 }}
               >
                 {item.label}
-
                 {activeSection === item.id && (
                   <motion.div
                     layoutId="activeSection"
@@ -63,14 +63,6 @@ export default function Navigation({ activeSection }: NavigationProps) {
                     transition={{ type: "spring", stiffness: 380, damping: 30 }}
                   />
                 )}
-
-                {/* Hover underline */}
-                <motion.div
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-cool-blue/50"
-                  initial={{ scaleX: 0 }}
-                  whileHover={{ scaleX: 1 }}
-                  transition={{ duration: 0.2 }}
-                />
               </motion.button>
             ))}
           </div>
@@ -82,7 +74,7 @@ export default function Navigation({ activeSection }: NavigationProps) {
             whileTap={{ scale: 0.9 }}
           >
             <button
-              className="text-fog-white hover:text-cool-blue transition-colors p-2"
+              className="text-white hover:text-cool-blue transition-colors p-2"
               aria-label="Open menu"
               onClick={() => setMobileOpen((open) => !open)}
             >
@@ -103,7 +95,7 @@ export default function Navigation({ activeSection }: NavigationProps) {
               transition={{ duration: 0.2 }}
               className="md:hidden overflow-hidden"
             >
-              <div className="pt-4 pb-2 bg-[#131521]/95 backdrop-blur-sm rounded-lg shadow-lg border border-white/5">
+              <div className="pt-4 pb-2 bg-[#0a0c10] backdrop-blur-sm rounded-lg shadow-lg border border-white/10">
                 {navItems.map((item) => (
                   <motion.button
                     key={item.id}
@@ -111,10 +103,8 @@ export default function Navigation({ activeSection }: NavigationProps) {
                       scrollToSection(item.id);
                       setMobileOpen(false);
                     }}
-                    className={`w-full text-left px-4 py-3 rounded-lg text-lg font-medium transition-colors duration-200 ${
-                      activeSection === item.id
-                        ? "text-cool-blue bg-white/5"
-                        : "text-soft-gray hover:text-fog-white hover:bg-white/5"
+                    className={`w-full text-left px-4 py-3 text-lg font-medium transition-colors ${
+                      activeSection === item.id ? "text-cool-blue bg-white/5" : "text-soft-gray hover:text-white hover:bg-white/5"
                     }`}
                     whileHover={{ x: 4 }}
                     whileTap={{ scale: 0.98 }}
