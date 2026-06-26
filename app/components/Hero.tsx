@@ -32,9 +32,9 @@ export default function Hero() {
       </motion.div>
 
       {/* Manifesto headline */}
-      <div className="py-16 md:py-20">
-        <Reveal stagger={0.1} className="max-w-[16ch]">
-          <h1 className="text-[clamp(2.75rem,9vw,8rem)] font-semibold leading-[0.95] tracking-[-0.03em]">
+      <div className="py-10 md:py-12">
+        <Reveal stagger={0.09} className="w-full">
+          <h1 className="text-[clamp(2.5rem,7.5vw,6.5rem)] font-semibold leading-[0.98] tracking-[-0.03em]">
             <Line>We build the</Line>
             <Line>
               <span className="italic font-light">software</span> that
@@ -47,12 +47,12 @@ export default function Hero() {
         </Reveal>
 
         {/* Sub + CTAs */}
-        <div className="mt-12 grid gap-10 md:grid-cols-12">
+        <div className="mt-10 grid gap-8 md:mt-12 md:grid-cols-12">
           <motion.p
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: SETTLE, delay: 0.6 }}
-            className="col-span-12 max-w-[42ch] text-lg leading-relaxed text-ink-80 md:col-span-7 md:text-xl"
+            className="col-span-12 max-w-[44ch] text-base leading-relaxed text-ink-80 md:col-span-7 md:text-lg"
           >
             PixelSolve is a small studio that ships{" "}
             <span className="text-ink">product-grade web &amp; AI systems</span>.

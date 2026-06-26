@@ -10,12 +10,12 @@ interface NavigationProps {
 }
 
 const navItems = [
-  { id: "home", label: "Index", path: "~/index" },
-  { id: "services", label: "Services", path: "~/services" },
-  { id: "process", label: "Process", path: "~/process" },
-  { id: "portfolio", label: "Work", path: "~/work" },
-  { id: "about", label: "Team", path: "~/team" },
-  { id: "contact", label: "Contact", path: "~/contact" },
+  { id: "home", label: "Home" },
+  { id: "services", label: "Services" },
+  { id: "process", label: "Process" },
+  { id: "portfolio", label: "Work" },
+  { id: "about", label: "Team" },
+  { id: "contact", label: "Contact" },
 ];
 
 export default function Navigation({ activeSection }: NavigationProps) {
@@ -48,26 +48,29 @@ export default function Navigation({ activeSection }: NavigationProps) {
           </span>
         </button>
 
-        {/* Desktop breadcrumb nav */}
+        {/* Desktop nav */}
         <nav className="hidden items-center gap-1 md:flex">
-          {navItems.map((item) => {
+          {navItems.map((item, i) => {
             const active = activeSection === item.id;
             return (
               <button
                 key={item.id}
                 onClick={() => go(item.id)}
-                className={`relative rounded-sharp px-3 py-2 font-mono text-[12px] uppercase tracking-[0.12em] transition-colors duration-200 ${
+                className={`group relative rounded-sharp px-3.5 py-2 text-sm tracking-[-0.01em] transition-colors duration-200 ${
                   active ? "text-ink" : "text-ink-60 hover:text-ink"
                 }`}
               >
                 {active && (
                   <motion.span
                     layoutId="nav-bead"
-                    className="absolute inset-x-2 -bottom-px h-[2px] bg-vermilion"
+                    className="absolute inset-x-3 -bottom-px h-[2px] bg-vermilion"
                     transition={{ duration: 0.4, ease: SETTLE }}
                   />
                 )}
-                {item.path}
+                <span className="font-mono text-[10px] text-ink-42 mr-1.5 align-middle transition-colors group-hover:text-ink-60">
+                  0{i + 1}
+                </span>
+                <span className="align-middle">{item.label}</span>
               </button>
             );
           })}
@@ -128,8 +131,8 @@ export default function Navigation({ activeSection }: NavigationProps) {
                   <span className="font-display text-2xl font-semibold">
                     {item.label}
                   </span>
-                  <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-60">
-                    0{i + 1} · {item.path}
+                  <span className="font-mono text-[11px] tracking-[0.16em] text-ink-42">
+                    0{i + 1}
                   </span>
                 </button>
               ))}
