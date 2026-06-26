@@ -46,49 +46,37 @@ export default function Home() {
 
   return (
     <>
-      {/* Loading Screen */}
+      {/* Loading Screen — dossier boot */}
       <AnimatePresence>
         {isLoading && (
           <motion.div
             initial={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-[#0f111a]"
+            transition={{ duration: 0.5, ease: [0.625, 0.05, 0, 1] }}
+            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-bone"
           >
             <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 1.2, opacity: 0 }}
-              transition={{ duration: 0.5 }}
-              className="text-center"
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, ease: [0.625, 0.05, 0, 1] }}
+              className="font-display text-4xl font-semibold tracking-[-0.03em] text-ink md:text-6xl"
             >
-              <motion.div
-                animate={{ 
-                  backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] 
-                }}
-                transition={{ 
-                  duration: 2, 
-                  repeat: Infinity, 
-                  ease: "linear" 
-                }}
-                className="text-4xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-4"
-              >
-                PixelSolve
-              </motion.div>
-              <motion.div
-                className="w-16 h-16 border-2 border-blue-500 border-t-transparent rounded-full mx-auto"
-                animate={{ rotate: 360 }}
-                transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-              />
-              <motion.p
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.5 }}
-                className="text-gray-400 mt-4"
-              >
-                Loading amazing experiences...
-              </motion.p>
+              PixelSolve
             </motion.div>
+            <motion.div
+              initial={{ scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 1.1, ease: [0.625, 0.05, 0, 1] }}
+              className="mt-6 h-px w-40 origin-center bg-vermilion md:w-56"
+            />
+            <motion.p
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.4, duration: 0.5 }}
+              className="mt-5 font-mono text-[11px] uppercase tracking-[0.2em] text-ink-60"
+            >
+              Opening the dossier
+            </motion.p>
           </motion.div>
         )}
       </AnimatePresence>
