@@ -1,11 +1,8 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter } from "next/font/google"
 import "./globals.css"
 import ScrollToTop from "@/components/ScrollToTop";
 import PageTransition from "@/components/PageTransition";
-
-const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
   title: "PixelSolve | Digital Solutions that Scale",
@@ -13,7 +10,7 @@ export const metadata: Metadata = {
     "PixelSolve is a futuristic tech company delivering cutting-edge solutions in app development, AI automation, SaaS, and web design. We build intelligent systems that learn, adapt, and solve real-world problems.",
   keywords: [
     "web development",
-    "app development", 
+    "app development",
     "AI automation",
     "UI/UX design",
     "SaaS development",
@@ -76,8 +73,8 @@ export const metadata: Metadata = {
   category: 'technology',
   classification: 'business',
   other: {
-    'theme-color': '#0F111A',
-    'msapplication-TileColor': '#0F111A',
+    'theme-color': '#0d0d0c',
+    'msapplication-TileColor': '#0d0d0c',
     'apple-mobile-web-app-capable': 'yes',
     'apple-mobile-web-app-status-bar-style': 'default',
     'apple-mobile-web-app-title': 'PixelSolve',
@@ -156,35 +153,41 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en">
       <head>
         <link rel="icon" type="image/png" href="/PixelSolve.png" />
         <link rel="apple-touch-icon" href="/PixelSolve.png" />
         <link rel="manifest" href="/manifest.json" />
-        
-        {/* Preconnect to external domains for performance */}
+
+        {/* Fonts: Space Grotesk + Satoshi (Fontshare), JetBrains Mono (Google) */}
+        <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link
+          rel="stylesheet"
+          href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=space-grotesk@400,500,600,700&display=swap"
+        />
+        <link
+          rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"
+        />
+
         <link rel="preconnect" href="https://github.com" />
         <link rel="preconnect" href="https://www.linkedin.com" />
         <link rel="preconnect" href="https://www.instagram.com" />
-        
-        {/* DNS prefetch for better performance */}
-        <link rel="dns-prefetch" href="//fonts.googleapis.com" />
         <link rel="dns-prefetch" href="//github.com" />
         <link rel="dns-prefetch" href="//www.linkedin.com" />
-        
+
         {/* Structured data */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
         />
-        
-        {/* Performance monitoring */}
+
+        {/* Performance monitoring + Service Worker */}
         <script
           dangerouslySetInnerHTML={{
             __html: `
-              // Performance monitoring
               window.addEventListener('load', function() {
                 setTimeout(function() {
                   const perfData = performance.getEntriesByType('navigation')[0];
@@ -194,7 +197,6 @@ export default function RootLayout({
                 }, 0);
               });
 
-              // Service Worker Registration
               if ('serviceWorker' in navigator) {
                 window.addEventListener('load', function() {
                   navigator.serviceWorker.register('/sw.js')
@@ -207,32 +209,17 @@ export default function RootLayout({
                 });
               }
 
-              // PWA Install Prompt
               let deferredPrompt;
               window.addEventListener('beforeinstallprompt', (e) => {
                 e.preventDefault();
                 deferredPrompt = e;
-                console.log('PWA install prompt ready');
               });
             `,
           }}
         />
       </head>
-      <body className={`${inter.className} antialiased`}>
-        {/* Global Animated Background */}
-        <div className="fixed inset-0 -z-10">
-          <div className="absolute inset-0 bg-gradient-to-br from-midnight-navy via-charcoal-black to-deep-slate" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(119,127,153,0.1),transparent_70%)]" />
-        </div>
-        {/* Animated Background Elements */}
-        <div className="animated-bg">
-          <div className="square"></div>
-          <div className="circle-1"></div>
-          <div className="circle-2"></div>
-        </div>
-        {/* End Global Animated Background */}
+      <body className="font-body antialiased">
         <ScrollToTop />
-        {/* Page transitions */}
         <PageTransition>{children}</PageTransition>
       </body>
     </html>
