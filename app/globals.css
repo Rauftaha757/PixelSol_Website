@@ -4,6 +4,7 @@
 
 @layer base {
   :root {
+    /* shadcn semantic tokens (retained) */
     --background: 0 0% 100%;
     --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
@@ -24,33 +25,44 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
-    /* Team member gradient colors */
-    --color-1: #3B82F6;
-    --color-2: #A855F7;
-    --color-3: #22C55E;
-    --color-4: #F97316;
-  }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+    /* ── "The Thinking System" tokens ─────────────────────────────── */
+    --canvas: #0d0d0c;
+    --canvas-raised: #15140f;
+
+    /* text opacity tiers (hierarchy via opacity, not named grays) */
+    --t-100: #ffffff;
+    --t-90: rgba(255, 255, 255, 0.9);
+    --t-70: rgba(255, 255, 255, 0.7);
+    --t-42: rgba(255, 255, 255, 0.42);
+    --t-16: rgba(255, 255, 255, 0.16);
+
+    /* the single energy gradient, reused everywhere */
+    --energy-indigo: #7a66e1;
+    --energy-pink: #fb3081;
+    --energy-coral: #f8805f;
+    --energy: linear-gradient(90deg, #7a66e1 0%, #fb3081 50%, #f8805f 100%);
+    --energy-soft: linear-gradient(
+      90deg,
+      rgba(122, 102, 225, 0.18),
+      rgba(251, 48, 129, 0.18),
+      rgba(248, 128, 95, 0.18)
+    );
+
+    /* hairlines */
+    --hair: rgba(255, 255, 255, 0.08);
+    --hair-strong: rgba(255, 255, 255, 0.12);
+    --hair-energy: rgba(122, 102, 225, 0.45);
+
+    /* mixed-radius system */
+    --r-screen: 8px;
+    --r-card: 22px;
+    --r-pill: 9999px;
+
+    /* type stack */
+    --font-display: "Space Grotesk", "General Sans", system-ui, sans-serif;
+    --font-body: "Satoshi", "Inter", system-ui, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, "Space Mono", monospace;
   }
 
   * {
@@ -60,181 +72,92 @@
 
   body {
     @apply bg-background text-foreground;
-    background-color: #0f111a;
-    color: #f3f4f6;
+    background-color: var(--canvas);
+    color: var(--t-90);
+    font-family: var(--font-body);
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* Headings use the display face */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+  }
+
+  /* tabular figures wherever numbers matter */
+  .tnum {
+    font-feature-settings: "tnum";
+    font-variant-numeric: tabular-nums;
   }
 
   html {
-    scroll-behavior: smooth;
     scroll-padding-top: 80px;
   }
 
-  /* Animated Background Elements */
-  .animated-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -10;
+  /* ── Lenis smooth scroll ── */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
     overflow: hidden;
-  }
-
-  .animated-bg::before,
-  .animated-bg::after {
-    content: '';
-    position: absolute;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(119, 127, 153, 0.1) 0%, transparent 70%);
-    animation: float 20s ease-in-out infinite;
-  }
-
-  .animated-bg::before {
-    width: 300px;
-    height: 300px;
-    top: 10%;
-    left: 10%;
-    animation-delay: 0s;
-    animation-duration: 25s;
-  }
-
-  .animated-bg::after {
-    width: 200px;
-    height: 200px;
-    top: 60%;
-    right: 10%;
-    animation-delay: -10s;
-    animation-duration: 30s;
-  }
-
-  .animated-bg .square {
-    position: absolute;
-    width: 150px;
-    height: 150px;
-    background: linear-gradient(45deg, rgba(119, 127, 153, 0.05), rgba(119, 127, 153, 0.1));
-    border-radius: 20px;
-    top: 30%;
-    right: 20%;
-    animation: float 18s ease-in-out infinite;
-    animation-delay: -5s;
-  }
-
-  .animated-bg .circle-1 {
-    position: absolute;
-    width: 100px;
-    height: 100px;
-    background: radial-gradient(circle, rgba(119, 127, 153, 0.08) 0%, transparent 70%);
-    border-radius: 50%;
-    top: 80%;
-    left: 20%;
-    animation: float 22s ease-in-out infinite;
-    animation-delay: -15s;
-  }
-
-  .animated-bg .circle-2 {
-    position: absolute;
-    width: 80px;
-    height: 80px;
-    background: radial-gradient(circle, rgba(119, 127, 153, 0.06) 0%, transparent 70%);
-    border-radius: 50%;
-    top: 20%;
-    right: 30%;
-    animation: float 28s ease-in-out infinite;
-    animation-delay: -8s;
   }
 }
 
 @layer utilities {
-  .glass-card {
-    background-color: rgba(34, 37, 56, 0.5);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(55, 60, 78, 0.3);
-  }
-
-  .glow-effect {
-    box-shadow: 0 10px 15px -3px rgba(119, 127, 153, 0.2), 0 4px 6px -2px rgba(119, 127, 153, 0.1);
-  }
-
-  .gradient-text {
-    background: linear-gradient(to right, #f3f4f6, #777f99);
+  /* The single energy gradient helpers */
+  .text-energy {
+    background: var(--energy);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    background-size: 200% 200%;
+  }
+  .bg-energy {
+    background-image: var(--energy);
+  }
+  .bg-energy-soft {
+    background-image: var(--energy-soft);
+  }
+  .border-hair {
+    border-color: var(--hair);
   }
 
-  .animate-float {
-    animation: float 6s ease-in-out infinite;
+  /* Legacy helpers — restyled to the warm canvas so not-yet-migrated
+     sections still read as intentional. Removed as sections are rewritten. */
+  .glass-card {
+    background-color: rgba(21, 20, 15, 0.55);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--hair);
   }
-
-  .animate-pulse-slow {
-    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  .gradient-text {
+    background: linear-gradient(to right, var(--t-100), var(--t-42));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
   }
-
-  .animate-bounce-slow {
-    animation: bounce 2s infinite;
+  .glow-effect {
+    box-shadow: 0 10px 40px rgba(122, 102, 225, 0.15);
   }
-
-  .animate-spin-slow {
-    animation: spin 8s linear infinite;
-  }
-
-  .magnetic {
-    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
-  }
-
-  .magnetic:hover {
-    transform: scale(1.05);
-  }
-
-  .text-reveal {
-    overflow: hidden;
-  }
-
-  .text-reveal span {
-    display: inline-block;
-    transform: translateY(100%);
-    animation: textReveal 0.8s cubic-bezier(0.23, 1, 0.32, 1) forwards;
-  }
-
-  .parallax {
-    transform: translateZ(0);
-    will-change: transform;
-  }
-
   .hover-lift {
-    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    transition: transform 0.5s cubic-bezier(0.625, 0.05, 0, 1),
+      box-shadow 0.5s cubic-bezier(0.625, 0.05, 0, 1);
   }
-
   .hover-lift:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 20px 40px rgba(119, 127, 153, 0.2);
+    transform: translateY(-6px);
+    box-shadow: 0 20px 50px rgba(251, 48, 129, 0.12);
   }
-
-  .glow-on-hover {
-    transition: box-shadow 0.3s ease;
-  }
-
-  .glow-on-hover:hover {
-    box-shadow: 0 0 20px rgba(119, 127, 153, 0.4);
-  }
-
-  .stagger-children > * {
-    opacity: 0;
-    transform: translateY(20px);
-    animation: staggerFadeIn 0.6s ease-out forwards;
-  }
-
-  .stagger-children > *:nth-child(1) { animation-delay: 0.1s; }
-  .stagger-children > *:nth-child(2) { animation-delay: 0.2s; }
-  .stagger-children > *:nth-child(3) { animation-delay: 0.3s; }
-  .stagger-children > *:nth-child(4) { animation-delay: 0.4s; }
-  .stagger-children > *:nth-child(5) { animation-delay: 0.5s; }
-  .stagger-children > *:nth-child(6) { animation-delay: 0.6s; }
 }
 
-/* Keyframe animations */
+/* Keyframe animations (ambient) */
 @keyframes float {
   0%, 100% {
     transform: translateY(0px);
@@ -244,63 +167,17 @@
   }
 }
 
-@keyframes textReveal {
-  0% {
-    transform: translateY(100%);
-  }
-  100% {
-    transform: translateY(0%);
-  }
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
 
-@keyframes staggerFadeIn {
-  0% {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Focus styles — energy-coloured, never gray */
+*:focus-visible {
+  outline: 2px solid rgba(122, 102, 225, 0.7);
+  outline-offset: 3px;
 }
 
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.shimmer {
-  background: linear-gradient(90deg, transparent, rgba(119, 127, 153, 0.2), transparent);
-  background-size: 200% 100%;
-  animation: shimmer 2s infinite;
-}
-
-/* Hero gradient animation */
-@keyframes gradient-xy {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-.animate-gradient-xy {
-  background-size: 200% 200%;
-  animation: gradient-xy 3s ease infinite;
-}
-
-/* Focus styles for accessibility */
-*:focus {
-  outline: 2px solid #777f99;
-  outline-offset: 2px;
-}
-
-/* Reduced motion for accessibility */
+/* Reduced motion: snap to final state, freeze ambient loops */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -308,12 +185,6 @@
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-  }
-}
-
-/* Performance optimizations for animations */
-@media (prefers-reduced-motion: no-preference) {
-  .animate-optimized {
-    will-change: transform, opacity;
+    scroll-behavior: auto !important;
   }
 }
