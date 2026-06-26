@@ -159,17 +159,17 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/PixelSolve.png" />
         <link rel="manifest" href="/manifest.json" />
 
-        {/* Fonts: Space Grotesk + Satoshi (Fontshare), JetBrains Mono (Google) */}
+        {/* Fonts: Fraunces + Satoshi (Fontshare), JetBrains Mono (Google) */}
         <link rel="preconnect" href="https://api.fontshare.com" crossOrigin="anonymous" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
           rel="stylesheet"
-          href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&f[]=space-grotesk@400,500,600,700&display=swap"
+          href="https://api.fontshare.com/v2/css?f[]=fraunces@400,500,600,700,900&f[]=satoshi@400,500,700,900&display=swap"
         />
         <link
           rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap"
+          href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap"
         />
 
         <link rel="preconnect" href="https://github.com" />
@@ -218,7 +218,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="font-body antialiased">
+      <body className="bg-bone text-ink font-body antialiased">
         <ScrollToTop />
         <PageTransition>{children}</PageTransition>
       </body>

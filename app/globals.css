@@ -26,154 +26,129 @@
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
 
-    /* ── "The Thinking System" tokens ─────────────────────────────── */
-    --canvas: #0d0d0c;
-    --canvas-raised: #15140f;
+    /* ── "Studio Dossier" tokens ──────────────────────────────────── */
+    --bone: #f4f1ea;
+    --bone-deep: #ebe6d9;
+    --bone-receipt: #efe9da;
+    --ink: #1a1714;
+    --rule: rgba(26, 23, 20, 0.12);
+    --rule-strong: rgba(26, 23, 20, 0.2);
+    --vermilion: #c8412b;
+    --vermilion-dim: #a8341f;
+    --marker: #f5c842;
+    --evidence: #13110f;
+    --evidence-raised: #1c1916;
 
-    /* text opacity tiers (hierarchy via opacity, not named grays) */
-    --t-100: #ffffff;
-    --t-90: rgba(255, 255, 255, 0.9);
-    --t-70: rgba(255, 255, 255, 0.7);
-    --t-42: rgba(255, 255, 255, 0.42);
-    --t-16: rgba(255, 255, 255, 0.16);
-
-    /* the single energy gradient, reused everywhere */
-    --energy-indigo: #7a66e1;
-    --energy-pink: #fb3081;
-    --energy-coral: #f8805f;
-    --energy: linear-gradient(90deg, #7a66e1 0%, #fb3081 50%, #f8805f 100%);
-    --energy-soft: linear-gradient(
-      90deg,
-      rgba(122, 102, 225, 0.18),
-      rgba(251, 48, 129, 0.18),
-      rgba(248, 128, 95, 0.18)
-    );
-
-    /* hairlines */
-    --hair: rgba(255, 255, 255, 0.08);
-    --hair-strong: rgba(255, 255, 255, 0.12);
-    --hair-energy: rgba(122, 102, 225, 0.45);
-
-    /* mixed-radius system */
-    --r-screen: 8px;
-    --r-card: 22px;
-    --r-pill: 9999px;
-
-    /* type stack */
-    --font-display: "Space Grotesk", "General Sans", system-ui, sans-serif;
-    --font-body: "Satoshi", "Inter", system-ui, sans-serif;
-    --font-mono: "JetBrains Mono", ui-monospace, "Space Mono", monospace;
+    /* type stack: Fraunces (display serif) + Satoshi (body grotesk) + JetBrains Mono */
+    --font-display: "Fraunces", "Georgia", "Times New Roman", serif;
+    --font-body: "Satoshi", "Inter", system-ui, -apple-system, sans-serif;
+    --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
   }
 
   * {
-    @apply border-border;
+    @apply border-rule;
     box-sizing: border-box;
   }
 
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 96px;
+    -webkit-text-size-adjust: 100%;
+  }
+
   body {
-    @apply bg-background text-foreground;
-    background-color: var(--canvas);
-    color: var(--t-90);
+    @apply bg-bone text-ink;
+    background-color: var(--bone);
+    color: var(--ink);
     font-family: var(--font-body);
+    font-feature-settings: "ss01", "cv11";
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;
   }
 
-  /* Headings use the display face */
+  /* Headings: Fraunces, optical sizing pushed, tight leading */
   h1, h2, h3, h4, h5, h6 {
     font-family: var(--font-display);
-    letter-spacing: -0.02em;
+    font-weight: 600;
+    font-optical-sizing: auto;
+    font-variation-settings: "opsz" 96, "SOFT" 50, "WONK" 0;
+    letter-spacing: -0.025em;
+    line-height: 0.98;
   }
 
-  /* tabular figures wherever numbers matter */
-  .tnum {
-    font-feature-settings: "tnum";
+  /* tabular figures wherever numbers live */
+  .tnum,
+  .font-mono {
     font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
   }
 
-  html {
-    scroll-padding-top: 80px;
-  }
-
-  /* ── Lenis smooth scroll ── */
-  html.lenis,
-  html.lenis body {
-    height: auto;
-  }
-  .lenis.lenis-smooth {
-    scroll-behavior: auto !important;
-  }
-  .lenis.lenis-smooth [data-lenis-prevent] {
-    overscroll-behavior: contain;
-  }
-  .lenis.lenis-stopped {
-    overflow: hidden;
+  ::selection {
+    background: var(--marker);
+    color: var(--ink);
   }
 }
 
 @layer utilities {
-  /* The single energy gradient helpers */
-  .text-energy {
-    background: var(--energy);
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-  }
-  .bg-energy {
-    background-image: var(--energy);
-  }
-  .bg-energy-soft {
-    background-image: var(--energy-soft);
-  }
-  .border-hair {
-    border-color: var(--hair);
+  /* the single accent helpers */
+  .text-vermilion { color: var(--vermilion); }
+  .bg-vermilion { background-color: var(--vermilion); }
+  .bg-ink { background-color: var(--ink); }
+  .bg-bone { background-color: var(--bone); }
+  .text-ink { color: var(--ink); }
+  .text-bone { color: var(--bone); }
+  .border-rule-strong { border-color: var(--rule-strong); }
+
+  /* marker-pen highlight behind ink text (AA-safe: ink sits ON the fill) */
+  .marker-highlight {
+    background-image: linear-gradient(
+      180deg,
+      transparent 0%,
+      transparent 55%,
+      var(--marker) 55%,
+      var(--marker) 92%,
+      transparent 92%
+    );
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    padding: 0 0.05em;
   }
 
-  /* Legacy helpers — restyled to the warm canvas so not-yet-migrated
+  /* hairline rule that grows in on scroll-into-view */
+  .rule-draw {
+    transform-origin: left;
+  }
+
+  /* Legacy helpers — restyled to the bone canvas so not-yet-migrated
      sections still read as intentional. Removed as sections are rewritten. */
   .glass-card {
-    background-color: rgba(21, 20, 15, 0.55);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--hair);
+    background-color: var(--bone-receipt);
+    backdrop-filter: none;
+    border: 1px solid var(--rule);
   }
   .gradient-text {
-    background: linear-gradient(to right, var(--t-100), var(--t-42));
+    background: linear-gradient(to right, var(--ink), var(--ink-60, rgba(26, 23, 20, 0.6)));
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
   }
-  .glow-effect {
-    box-shadow: 0 10px 40px rgba(122, 102, 225, 0.15);
-  }
+  .glow-effect { box-shadow: 0 1px 0 0 var(--rule); }
   .hover-lift {
     transition: transform 0.5s cubic-bezier(0.625, 0.05, 0, 1),
       box-shadow 0.5s cubic-bezier(0.625, 0.05, 0, 1);
   }
   .hover-lift:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 20px 50px rgba(251, 48, 129, 0.12);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 0 -8px rgba(26, 23, 20, 0.08);
   }
+  .animated-bg { display: none !important; }
 }
 
-/* Keyframe animations (ambient) */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-.animate-float {
-  animation: float 6s ease-in-out infinite;
-}
-
-/* Focus styles — energy-coloured, never gray */
+/* Focus — vermilion, never gray */
 *:focus-visible {
-  outline: 2px solid rgba(122, 102, 225, 0.7);
+  outline: 2px solid var(--vermilion);
   outline-offset: 3px;
 }
 

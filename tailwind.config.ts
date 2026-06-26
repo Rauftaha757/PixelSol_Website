@@ -51,34 +51,38 @@ const config: Config = {
           foreground: "hsl(var(--card-foreground))",
         },
 
-        // ── "The Thinking System" palette ──────────────────────────────
-        canvas: {
-          DEFAULT: "#0d0d0c", // warm near-black page background
-          raised: "#15140f", // panels / screens (+8 over canvas)
+        // ── "Studio Dossier" editorial palette ─────────────────────────
+        bone: {
+          DEFAULT: "#f4f1ea", // warm off-white canvas (primary)
+          deep: "#ebe6d9", // secondary surface / alt rows
+          receipt: "#efe9da", // raised panel surface
         },
-        energy: {
-          indigo: "#7a66e1",
-          pink: "#fb3081",
-          coral: "#f8805f",
+        ink: {
+          DEFAULT: "#1a1714", // primary text / rules / solid fills (warm near-black)
+          90: "#1a1714e5",
+          80: "#1a1714cc",
+          60: "#1a171499",
+          42: "#1a17146b",
+          35: "#1a171459",
         },
-        led: "#5eead4", // channel "online" LED teal
-        // text opacity tiers — hierarchy via opacity, not named grays
-        t: {
-          100: "#ffffff",
-          90: "rgba(255, 255, 255, 0.9)",
-          70: "rgba(255, 255, 255, 0.7)",
-          42: "rgba(255, 255, 255, 0.42)",
-          16: "rgba(255, 255, 255, 0.16)",
+        rule: {
+          DEFAULT: "#1a17141f", // 1px hairline (ink @ 12%)
+          strong: "#1a171433", // active divider (ink @ 20%)
         },
-        // hairlines
-        hair: {
-          DEFAULT: "rgba(255, 255, 255, 0.08)",
-          strong: "rgba(255, 255, 255, 0.12)",
-          energy: "rgba(122, 102, 225, 0.45)",
+        vermilion: {
+          DEFAULT: "#c8412b", // THE single accent — surgical, AA-safe on bone at 16px+
+          dim: "#a8341f", // pressed/active
+        },
+        marker: "#f5c842", // marker-pen highlight fill behind ink text
+        // "evidence room" dark sections
+        evidence: {
+          DEFAULT: "#13110f", // ink-dark section bg
+          raised: "#1c1916", // panel on dark
+          hair: "#ffffff14", // hairline on dark
         },
 
-        // Legacy named colours — retained ONLY so the not-yet-migrated
-        // sections keep rendering. Removed as each section is rewritten.
+        // Legacy named colours — retained ONLY so not-yet-migrated sections
+        // keep rendering. Removed as each section is rewritten.
         "charcoal-black": "#0F111A",
         "midnight-navy": "#050714",
         "deep-slate": "#131521",
@@ -96,13 +100,13 @@ const config: Config = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
         // mixed-radius system
-        screen: "8px", // sharp panels / "screens" / titlebars
-        card: "22px", // cards
-        pill: "9999px", // buttons / inputs / badges
+        none: "0", // hairline-ruled rows, panels
+        sharp: "4px", // buttons, tags, pills edges
+        panel: "16px", // raised panels / tiles
       },
       fontFamily: {
-        display: ["var(--font-display)"], // Space Grotesk
-        body: ["var(--font-body)"], // Satoshi
+        display: ["var(--font-display)"], // Fraunces (serif)
+        body: ["var(--font-body)"], // Satoshi (grotesk)
         mono: ["var(--font-mono)"], // JetBrains Mono
         sans: ["var(--font-body)"],
       },
