@@ -1,132 +1,142 @@
-"use client"
+"use client";
 
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+
+const SETTLE = [0.625, 0.05, 0, 1] as const;
 
 interface NavigationProps {
-  activeSection: string
+  activeSection: string;
 }
 
+const navItems = [
+  { id: "home", label: "Index", path: "~/index" },
+  { id: "services", label: "Services", path: "~/services" },
+  { id: "process", label: "Process", path: "~/process" },
+  { id: "portfolio", label: "Work", path: "~/work" },
+  { id: "about", label: "Team", path: "~/team" },
+  { id: "contact", label: "Contact", path: "~/contact" },
+];
+
 export default function Navigation({ activeSection }: NavigationProps) {
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
-  const navItems = [
-    { id: "home", label: "Home" },
-    { id: "services", label: "Services" },
-    { id: "process", label: "Process" },
-    { id: "portfolio", label: "Portfolio" },
-    { id: "about", label: "About" },
-    { id: "contact", label: "Contact" },
-  ]
-
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
-  }
+  const go = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth" });
+    setOpen(false);
+  };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0f111a]/80 backdrop-blur-md border-b border-[#373c4e]/20">
-      <div className="container mx-auto px-6 py-4">
-        <div className="flex items-center justify-between">
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="text-2xl font-bold gradient-text cursor-pointer"
-            onClick={() => scrollToSection("home")}
-          >
+    <motion.header
+      initial={{ y: -40, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.8, ease: SETTLE, delay: 0.15 }}
+      className="fixed inset-x-0 top-0 z-50 border-b border-rule bg-bone/85 backdrop-blur-md"
+    >
+      <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4 md:px-12">
+        {/* Wordmark */}
+        <button
+          onClick={() => go("home")}
+          className="group flex items-center gap-2.5"
+          aria-label="PixelSolve — home"
+        >
+          <span className="grid h-8 w-8 place-items-center rounded-sharp bg-ink text-bone transition-transform duration-300 group-hover:-rotate-6">
+            <span className="font-display text-[15px] font-semibold leading-none">P</span>
+          </span>
+          <span className="font-display text-xl font-semibold tracking-[-0.02em]">
             PixelSolve
-          </motion.div>
+          </span>
+        </button>
 
-          <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <motion.button
+        {/* Desktop breadcrumb nav */}
+        <nav className="hidden items-center gap-1 md:flex">
+          {navItems.map((item) => {
+            const active = activeSection === item.id;
+            return (
+              <button
                 key={item.id}
-                onClick={() => scrollToSection(item.id)}
-                className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 ${
-                  activeSection === item.id ? "text-cool-blue" : "text-soft-gray hover:text-fog-white"
+                onClick={() => go(item.id)}
+                className={`relative rounded-sharp px-3 py-2 font-mono text-[12px] uppercase tracking-[0.12em] transition-colors duration-200 ${
+                  active ? "text-ink" : "text-ink-60 hover:text-ink"
                 }`}
-                whileHover={{
-                  scale: 1.05,
-                  y: -2,
-                }}
-                whileTap={{ scale: 0.95 }}
               >
-                {item.label}
-
-                {activeSection === item.id && (
-                  <motion.div
-                    layoutId="activeSection"
-                    className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-cool-blue to-accent-blue"
-                    initial={false}
-                    transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                {active && (
+                  <motion.span
+                    layoutId="nav-bead"
+                    className="absolute inset-x-2 -bottom-px h-[2px] bg-vermilion"
+                    transition={{ duration: 0.4, ease: SETTLE }}
                   />
                 )}
+                {item.path}
+              </button>
+            );
+          })}
+        </nav>
 
-                {/* Hover underline */}
-                <motion.div
-                  className="absolute bottom-0 left-0 right-0 h-0.5 bg-cool-blue/50"
-                  initial={{ scaleX: 0 }}
-                  whileHover={{ scaleX: 1 }}
-                  transition={{ duration: 0.2 }}
-                />
-              </motion.button>
-            ))}
-          </div>
-
-          {/* Mobile menu button */}
-          <motion.div
-            className="md:hidden"
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
+        {/* CTA + mobile toggle */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={() => go("contact")}
+            className="hidden rounded-sharp bg-ink px-4 py-2 font-mono text-[12px] uppercase tracking-[0.12em] text-bone transition-colors duration-300 hover:bg-vermilion md:inline-flex"
           >
-            <button
-              className="text-fog-white hover:text-cool-blue transition-colors p-2"
-              aria-label="Open menu"
-              onClick={() => setMobileOpen((open) => !open)}
-            >
-              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
-            </button>
-          </motion.div>
+            Start →
+          </button>
+          <button
+            onClick={() => setOpen((o) => !o)}
+            className="grid h-9 w-9 place-items-center rounded-sharp border border-rule-strong text-ink md:hidden"
+            aria-label="Toggle menu"
+            aria-expanded={open}
+          >
+            <span className="relative block h-3 w-4">
+              <span
+                className={`absolute left-0 h-px w-4 bg-ink transition-all duration-300 ${
+                  open ? "top-1.5 rotate-45" : "top-0"
+                }`}
+              />
+              <span
+                className={`absolute left-0 top-1.5 h-px w-4 bg-ink transition-all duration-300 ${
+                  open ? "opacity-0" : "opacity-100"
+                }`}
+              />
+              <span
+                className={`absolute left-0 h-px w-4 bg-ink transition-all duration-300 ${
+                  open ? "top-1.5 -rotate-45" : "top-3"
+                }`}
+              />
+            </span>
+          </button>
         </div>
-
-        {/* Mobile menu dropdown with AnimatePresence */}
-        <AnimatePresence>
-          {mobileOpen && (
-            <motion.div
-              initial={{ opacity: 0, y: -20, height: 0 }}
-              animate={{ opacity: 1, y: 0, height: "auto" }}
-              exit={{ opacity: 0, y: -20, height: 0 }}
-              transition={{ duration: 0.2 }}
-              className="md:hidden overflow-hidden"
-            >
-              <div className="pt-4 pb-2 bg-[#131521]/95 backdrop-blur-sm rounded-lg shadow-lg border border-white/5">
-                {navItems.map((item) => (
-                  <motion.button
-                    key={item.id}
-                    onClick={() => {
-                      scrollToSection(item.id);
-                      setMobileOpen(false);
-                    }}
-                    className={`w-full text-left px-4 py-3 rounded-lg text-lg font-medium transition-colors duration-200 ${
-                      activeSection === item.id
-                        ? "text-cool-blue bg-white/5"
-                        : "text-soft-gray hover:text-fog-white hover:bg-white/5"
-                    }`}
-                    whileHover={{ x: 4 }}
-                    whileTap={{ scale: 0.98 }}
-                  >
-                    {item.label}
-                  </motion.button>
-                ))}
-              </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
       </div>
-    </nav>
-  )
+
+      {/* Mobile command overlay */}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.4, ease: SETTLE }}
+            className="overflow-hidden border-t border-rule bg-bone md:hidden"
+          >
+            <nav className="flex flex-col px-6 py-2">
+              {navItems.map((item, i) => (
+                <button
+                  key={item.id}
+                  onClick={() => go(item.id)}
+                  className="flex items-baseline justify-between border-b border-rule py-4 text-left last:border-0"
+                >
+                  <span className="font-display text-2xl font-semibold">
+                    {item.label}
+                  </span>
+                  <span className="font-mono text-[11px] uppercase tracking-[0.16em] text-ink-60">
+                    0{i + 1} · {item.path}
+                  </span>
+                </button>
+              ))}
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.header>
+  );
 }
