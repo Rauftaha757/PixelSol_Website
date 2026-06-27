@@ -39,10 +39,10 @@
     --evidence: #13110f;
     --evidence-raised: #1c1916;
 
-    /* type stack: Fraunces (display serif) + Satoshi (body grotesk) + JetBrains Mono */
+    /* type stack: Fraunces (display serif) + General Sans (body grotesk) + Space Mono */
     --font-display: "Fraunces", "Georgia", "Times New Roman", serif;
-    --font-body: "Satoshi", "Inter", system-ui, -apple-system, sans-serif;
-    --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+    --font-body: "General Sans", "Satoshi", system-ui, -apple-system, sans-serif;
+    --font-mono: "Space Mono", ui-monospace, "SF Mono", Menlo, monospace;
   }
 
   * {

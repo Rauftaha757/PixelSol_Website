@@ -106,8 +106,8 @@ const config: Config = {
       },
       fontFamily: {
         display: ["var(--font-display)"], // Fraunces (serif)
-        body: ["var(--font-body)"], // Satoshi (grotesk)
-        mono: ["var(--font-mono)"], // JetBrains Mono
+        body: ["var(--font-body)"], // General Sans (grotesk)
+        mono: ["var(--font-mono)"], // Space Mono
         sans: ["var(--font-body)"],
       },
       animation: {
