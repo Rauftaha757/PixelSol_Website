@@ -1,63 +1,99 @@
-import Link from "next/link"
+import Link from "next/link";
 
+/**
+ * 404 — the "dead link" page, in the Studio Dossier system.
+ * Server component; matches the bone canvas, Fraunces headline, hairlines,
+ * vermilion accent and bespoke mark used across the site.
+ */
 export default function NotFound() {
   return (
-    <div className="min-h-screen bg-[#0f111a] flex items-center justify-center relative overflow-hidden">
-      {/* Background Animation */}
-      <div className="absolute inset-0">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-blue-500/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-purple-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-48 h-48 bg-green-500/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+    <section className="relative mx-auto flex min-h-[100svh] max-w-[1400px] flex-col justify-between px-6 pb-16 pt-32 md:px-12 md:pt-40">
+      {/* top metadata strip */}
+      <div className="flex items-center justify-between border-b border-rule pb-5 font-mono text-[11px] uppercase tracking-[0.18em] text-ink-60">
+        <span className="flex items-center gap-2">
+          <span className="inline-block h-1.5 w-1.5 rounded-full bg-vermilion" />
+          Error 404
+        </span>
+        <span className="hidden sm:inline">This page doesn't exist</span>
+        <span>Build / Fix / Rescue</span>
       </div>
 
-      <div className="relative z-10 text-center px-6">
-        <div className="mb-8">
-          <h1 className="text-8xl md:text-9xl font-bold bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent mb-4">
-            404
+      {/* main */}
+      <div className="grid flex-1 grid-cols-1 items-center gap-10 py-16 md:grid-cols-12">
+        <div className="md:col-span-8">
+          <span className="font-mono text-[11px] uppercase tracking-[0.18em] text-vermilion">
+            § — Not found
+          </span>
+          <h1 className="mt-4 font-display text-[clamp(3rem,10vw,8rem)] font-semibold leading-[0.92] tracking-[-0.03em]">
+            This page
+            <br />
+            <span className="italic font-light">drifted off</span>.
           </h1>
-          
-          <h2 className="text-2xl md:text-3xl font-semibold text-white mb-4">
-            Page Not Found
-          </h2>
-          
-          <p className="text-lg text-gray-400 max-w-md mx-auto mb-8">
-            The page you're looking for seems to have wandered off into the digital void.
+          <p className="mt-8 max-w-[44ch] text-base leading-relaxed text-ink-60 md:text-lg">
+            The link you followed leads nowhere — a half-finished route, a
+            stale bookmark, or something we moved. Nothing is broken; it's
+            just not here. Let's get you back to the work.
           </p>
+
+          <div className="mt-10 flex flex-col gap-3 sm:flex-row md:items-center">
+            <Link
+              href="/"
+              className="group inline-flex items-center justify-center gap-3 rounded-sharp bg-vermilion px-7 py-4 text-sm font-medium tracking-wide text-bone transition-colors duration-300 hover:bg-vermilion-dim"
+            >
+              Back to the dossier
+              <svg
+                className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                viewBox="0 0 16 16"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="1.5"
+              >
+                <path d="M4 8h8M8 4l4 4-4 4" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
+            </Link>
+            <Link
+              href="/#contact"
+              className="inline-flex items-center justify-center gap-2 rounded-sharp border border-rule-strong px-7 py-4 text-sm font-medium text-ink transition-colors duration-300 hover:border-ink"
+            >
+              Report a broken link
+            </Link>
+          </div>
         </div>
 
-        {/* Animated Divider */}
-        <div className="h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent mx-auto mb-8 w-24"></div>
-
-        {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-cool-blue to-accent-blue text-white font-semibold rounded-full hover:shadow-lg hover:shadow-cool-blue/25 transition-all duration-300"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-            </svg>
-            <span>Go Home</span>
-          </Link>
-
-          <Link
-            href="/"
-            className="inline-flex items-center gap-2 px-6 py-3 bg-[#22273a]/80 text-gray-200 font-medium border border-blue-500/20 hover:bg-[#22273a] hover:border-blue-500/40 transition-all duration-300 rounded-full"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-            </svg>
-            <span>Go Back</span>
-          </Link>
-        </div>
-
-        {/* Additional Info */}
-        <div className="mt-12">
-          <p className="text-gray-500 text-sm">
-            "Even the best code has bugs, but we're here to fix them"
-          </p>
+        {/* faceted mark (echoes the 3D object's reduced-motion fallback) */}
+        <div className="grid place-items-center md:col-span-4" aria-hidden>
+          <svg viewBox="0 0 200 200" className="h-56 w-56 text-vermilion md:h-72 md:w-72">
+            <polygon
+              points="100,15 170,55 170,145 100,185 30,145 30,55"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.5"
+            />
+            <polygon
+              points="100,15 100,185 30,55 170,145"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.8"
+              opacity="0.5"
+            />
+            <polygon
+              points="100,15 30,145 170,145"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="0.8"
+              opacity="0.5"
+            />
+            <circle cx="100" cy="100" r="14" fill="currentColor" />
+          </svg>
         </div>
       </div>
-    </div>
-  )
-} 
+
+      {/* footer line */}
+      <div className="border-t border-rule pt-6">
+        <p className="font-display text-base italic text-ink-60">
+          Even the best code has bugs. We're here to fix them.
+        </p>
+      </div>
+    </section>
+  );
+}
